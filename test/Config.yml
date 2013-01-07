@@ -8,7 +8,12 @@ birth_year: 1954
 
 #  Starting savings
 starting_ira: 600000
-starting_non_ira: 60000
+starting_non_ira: 62000
+
+#  Starting debt of $2000
+debt_amount: 1818.18
+debt_interest: 5   #In percent
+debt_years: 4
 
 #INCOME
 #  Navy Retirement

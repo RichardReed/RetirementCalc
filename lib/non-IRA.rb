@@ -38,7 +38,7 @@ class NonIRA
 
     def non_ira_account(final_year)
         this_year = @current_year
-        non_ira_account_value = @config_hash.config['starting_non_ira'] 
+        non_ira_account_value = initial_non_ira_account_value
         ira_to_non_ira_xfer = @config_hash.config['ira_to_non_ira_xfer']
         interest = @config_hash.config['savings_interest_rate'] / 100.0
 
@@ -52,6 +52,18 @@ class NonIRA
                                 (1 + interest)).round
             end
         end  # do
-    return non_ira_account_value
+        return non_ira_account_value
+    end
+
+  private
+
+    def initial_non_ira_account_value
+      starting_non_ira = @config_hash.config['starting_non_ira']
+      debt_amount = @config_hash.config['debt_amount']
+      debt_interest = @config_hash.config['debt_interest']
+      debt_years = @config_hash.config['debt_years']
+
+      starting_debt = debt_amount * (1 + (debt_years * debt_interest / 200.0))
+      initial_non_ira_account = starting_non_ira - starting_debt
     end
 end
