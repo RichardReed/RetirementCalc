@@ -7,8 +7,9 @@ starting_month: 4
 birth_year: 1954
 
 #  Starting savings
-starting_ira: 600000
-starting_non_ira: 62000
+starting_ira: 666667
+starting_non_ira: 68889
+starting_savings_discount: 90   #Percentage of savings used in calculations.
 
 #  Starting debt of $2000
 debt_amount: 1818.18

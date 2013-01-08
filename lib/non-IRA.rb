@@ -59,11 +59,13 @@ class NonIRA
 
     def initial_non_ira_account_value
       starting_non_ira = @config_hash.config['starting_non_ira']
+      starting_non_ira_disc = @config_hash.config['starting_savings_discount']
       debt_amount = @config_hash.config['debt_amount']
       debt_interest = @config_hash.config['debt_interest']
       debt_years = @config_hash.config['debt_years']
 
       starting_debt = debt_amount * (1 + (debt_years * debt_interest / 200.0))
-      initial_non_ira_account = starting_non_ira - starting_debt
+      initial_non_ira_account = (starting_non_ira * starting_non_ira_disc / 
+                                100) - starting_debt
     end
 end
