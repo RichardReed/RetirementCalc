@@ -1,6 +1,6 @@
 #For the specified year or age, places the results in the Results.yml file
 
-require_relative 'Config'
+require_relative '../test/Config'
 require_relative 'AgeYear'
 require_relative 'Income'
 require_relative 'Expense'

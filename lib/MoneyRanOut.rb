@@ -1,8 +1,8 @@
 #Runs the retirement calculator to determine the year in which retirement money runs out.
 #Stops at age 120 if money has not run out.
 
-require_relative 'Config'
-require_relative 'Results'
+require_relative '../test/Config'
+require_relative '../test/Results'
 require_relative 'AgeYear'
 require_relative 'IRA'
 require_relative 'non-IRA'
