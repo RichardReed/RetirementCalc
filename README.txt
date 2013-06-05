@@ -1,3 +1,6 @@
+OVERVIEW
+	At this time, this program is very specific, for my retirement.  However I hope to make it more generic in the future.
+	
 HOW TO USE
 	To find out the year the sum of IRA savings and Non IRA savings is < 0, run MoneyRanOut.rb
 	To get the summary of retirement funds for a specific year, run RetCalc.rb
@@ -13,7 +16,7 @@ TO DO
 - Add error handling
 - Add a UI interface for input and output
 
-
+CALCULATIONS
 Taxrate is based on income + IRA Spending as follows:
 	< $19,000:          0
 	$19,000 - $36,000:  10%
@@ -40,28 +43,10 @@ Income_tax = (improving_income * (tax_rate + 7.65%)) + ((GE_pension + Alcatel_Pe
 
 non-IRA_Account = non-IRA_account - Income_taxes
 
+TESTING
+	Testing is based on fictious numbers run through TestCalculations.xlsx.  Provided the program results are within + or - $1 of the spread sheet, I considered the answers correct.
 
-Test case example:
-class TestRoman < Test::Unit::TestCase
-  NUMBERS = [
-    [ 1, "i" ], [ 2, "ii" ], [ 3, "iii" ],
-    [ 4, "iv"], [ 5, "v" ], [ 9, "ix" ]
-  ]
-  def test_simple
-    NUMBERS.each do |arabic, roman|
-      r = Roman.new(arabic)
-      assert_equal(roman, r.to_s)
-    end
-  end
-end
 
-OLD ALGORYTHMS
-Taxes_on_income(not IRA spending) = (improving_income * (tax_rate + 7.65%)) + ((GE_pension + Alcatel_Pension + SS + Navy_pension) * tax_rate)
-Taxes_on_IRA_Spending = IRA_spend * tax_rate
-IRA_spend = Gross_income - income_taxes - gross_exp
-
-IRA_Account = (IRA_Account - IRA_spend) * interest_rate
-non-IRA_Account = non-IRA_account - Taxes_on_IRA_Spending
 
 
 
