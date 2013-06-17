@@ -9,12 +9,15 @@ HOW TO USE
 
 TO DO
 - MoneyRunOut.rb, print out last year before money runs out not year that money ran out
+- Allow starting Social Security income for each spouse separately
 - Allow changes to Expenses when moving to the retirement home and into assisted living
+- Change tests to Rspec
+- Use stubs and mocks for individual class tests, instead of the spread sheet
 - Create a menu for selecting the option
 - Create option to cycle through each year with results going into a spread sheet
 - Change the opening and writing of the yml files to use blocks.  Programming Ruby Version 2 pg 50, 51
 - Add error handling
-- Add a UI interface for input and output
+- Add a UI interface for input and output yml files
 
 CALCULATIONS
 Taxrate is based on (income + IRA Spending) as follows:

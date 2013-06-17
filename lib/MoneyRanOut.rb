@@ -1,8 +1,8 @@
 #Runs the retirement calculator to determine the year in which retirement money runs out.
 #Stops at age 120 if money has not run out.
 
-require_relative '../test/Config'
-require_relative '../test/Results'
+require_relative 'Config'
+require_relative 'Results'
 require_relative 'AgeYear'
 require_relative 'IRA'
 require_relative 'non-IRA'
@@ -10,7 +10,7 @@ require_relative 'non-IRA'
 class MoneyRanOut
 	def initialize
 		@config_hash = ConfigFile.instance
-    @final_results = Results.new
+		@final_results = Results.new
 		@current_year = @config_hash.config['starting_year']
 		@ira_in = IRA.new
 		@non_ira_in = NonIRA.new
