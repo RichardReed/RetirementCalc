@@ -3,21 +3,10 @@ OVERVIEW
 	
 HOW TO USE
 	To find out the year the sum of IRA savings and Non IRA savings is < 0, run MoneyRanOut.rb
+	To find out the year prior to running out of money, run LastYearWithMoney.rb 
 	To get the summary of retirement funds for a specific year, run RetCalc.rb
 	Information from the last run is stored in Results.yml and displayed on command line
 	All income, expenses, starting savings, interest rates, etc are in Config.yml
-
-TO DO
-- MoneyRunOut.rb, print out last year before money runs out not year that money ran out
-- Allow starting Social Security income for each spouse separately
-- Allow changes to Expenses when moving to the retirement home and into assisted living
-- Change tests to Rspec
-- Use stubs and mocks for individual class tests, instead of the spread sheet
-- Create a menu for selecting the option
-- Create option to cycle through each year with results going into a spread sheet
-- Change the opening and writing of the yml files to use blocks.  Programming Ruby Version 2 pg 50, 51
-- Add error handling
-- Add a UI interface for input and output yml files
 
 CALCULATIONS
 Taxrate is based on (income + IRA Spending) as follows:
