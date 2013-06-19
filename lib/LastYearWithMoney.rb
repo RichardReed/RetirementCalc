@@ -6,11 +6,13 @@ require_relative 'Results'
 require_relative 'AgeYear'
 require_relative 'IRA'
 require_relative 'non-IRA'
+require_relative 'ResultsToCommandLine'
 
 class LastYearWithMoney
 	def initialize
 		@config_hash = ConfigFile.instance
 		@final_results = Results.new
+		@write_results_to_command_line = ResultsToCommandLine.new
 		@current_year = @config_hash.config['starting_year']
 		@ira_in = IRA.new
 		@non_ira_in = NonIRA.new
@@ -23,11 +25,12 @@ class LastYearWithMoney
 			final_year += 1
 		end
 		@final_results.results_for(final_year - 1)
-		File.open('results.yml', 'r') do |file|  
-			while line = file.gets  
-				puts line  
-			end  
-		end  
+		@write_results_to_command_line.results_to_command_line()
+		#File.open('results.yml', 'r') do |file|  
+		#	while line = file.gets  
+		#		puts line  
+		#	end  
+		#end  
 	end
 end
 
