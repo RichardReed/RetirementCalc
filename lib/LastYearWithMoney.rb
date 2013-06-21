@@ -1,4 +1,4 @@
-#Runs the retirement calculator to determine the year in which retirement money runs out.
+#Runs the retirement calculator to determine the last year with money in the bank.
 #Stops at age 120 if money has not run out.
 
 require_relative 'Config'
@@ -26,21 +26,8 @@ class LastYearWithMoney
 		end
 		@final_results.results_for(final_year - 1)
 		@write_results_to_command_line.results_to_command_line()
-		#File.open('results.yml', 'r') do |file|  
-		#	while line = file.gets  
-		#		puts line  
-		#	end  
-		#end  
 	end
 end
 
 @last_year_with_money = LastYearWithMoney.new
 @last_year_with_money.year_last_with_money
-
-=begin
-File.open('results.yml', 'r') do |file|  
-	while line = file.gets  
-		puts line  
-	end  
-end 
-=end 

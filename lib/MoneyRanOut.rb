@@ -6,11 +6,13 @@ require_relative 'Results'
 require_relative 'AgeYear'
 require_relative 'IRA'
 require_relative 'non-IRA'
+require_relative 'ResultsToCommandLine'
 
 class MoneyRanOut
 	def initialize
 		@config_hash = ConfigFile.instance
 		@final_results = Results.new
+		@write_results_to_command_line = ResultsToCommandLine.new
 		@current_year = @config_hash.config['starting_year']
 		@ira_in = IRA.new
 		@non_ira_in = NonIRA.new
@@ -22,22 +24,15 @@ class MoneyRanOut
 				(@ira_in.ira_account(final_year) + @non_ira_in.non_ira_account(final_year) < 0)
 			final_year += 1
 		end
+		return final_year
+	end
+	
+	def final_year_results
+		final_year = year_ran_out_of_money()
 		@final_results.results_for(final_year)
-		File.open('results.yml', 'r') do |file|  
-			while line = file.gets  
-				puts line  
-			end  
-		end  
+		@write_results_to_command_line.results_to_command_line()
 	end
 end
 
 @money_ran_out = MoneyRanOut.new
 @money_ran_out.year_ran_out_of_money
-
-=begin
-File.open('results.yml', 'r') do |file|  
-	while line = file.gets  
-		puts line  
-	end  
-end 
-=end 
