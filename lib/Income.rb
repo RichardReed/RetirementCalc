@@ -59,29 +59,39 @@ class IncomeCalc
 	def ss_income(final_year)
 		nonworking_income(final_year, 'starting_ss', ss_start_year, 'navy_and_ss_raise')
 	end
+	
+	def ss_spouse_start_year
+		@config_hash.config['ss_spouse_start_age'].is_year
+	end
+
+	def ss_spouse_income(final_year)
+		nonworking_income(final_year, 'starting_spouse_ss', ss_spouse_start_year, 'navy_and_ss_raise')
+	end
   
-   def lump_sum_income(final_year)  
-    if @config_hash.config[final_year.to_s].to_i > 0
-      lump_sum_income = (@config_hash.config[final_year.to_s].to_i)  
-    else
-      lump_sum_income = 0
+    def lump_sum_income(final_year)  
+        if @config_hash.config[final_year.to_s].to_i > 0
+            lump_sum_income = (@config_hash.config[final_year.to_s].to_i)  
+        else
+        lump_sum_income = 0
+        end
     end
-  end
 	
 	def gross_income(final_year)
 		improving_income(final_year) + navy_ret_income(final_year) +
 		ge_pension_income(final_year) + alc_pension_income(final_year) + 
-    ss_income(final_year) + lump_sum_income(final_year)
+        ss_income(final_year) + ss_spouse_income(final_year) + 
+		lump_sum_income(final_year)
 	end
 	
 	def pension_income(final_year)
 		navy_ret_income(final_year) + ge_pension_income(final_year) +
-		alc_pension_income(final_year) + ss_income(final_year)
+		alc_pension_income(final_year) + ss_income(final_year) + 
+		ss_spouse_income(final_year)
 	end
 
 private  
-  def nonworking_income (final_year, starting_income, starting_year, raise)
-    income = @config_hash.config[starting_income] * 12
+    def nonworking_income (final_year, starting_income, starting_year, raise)
+        income = @config_hash.config[starting_income] * 12
 	
 		return 0 if final_year < starting_year
 

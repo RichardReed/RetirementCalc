@@ -18,11 +18,11 @@ class TestMoneyRanOut < Test::Unit::TestCase
 		def test_money_ran_out
 		assert_equal(2029, @finalyr[:year])
 		assert_equal(75, @finalyr[:age])
-		assert_equal(103931, @finalyr[:income])
+		assert_equal(112783, @finalyr[:income])
 		assert_equal(29989, @finalyr[:taxes])
 		assert_equal(105096, @finalyr[:exp_other_than_medical])
 		assert_equal(49859, @finalyr[:medical_expenses])
-		assert_equal(-27057, @finalyr[:ira_savings])
+		assert_equal(-69539, @finalyr[:ira_savings])
 		assert_equal(1013, @finalyr[:non_ira_savings])
 	end
 end
