@@ -15,23 +15,30 @@ class TestExpenseMethods < Test::Unit::TestCase
 	end
 	
 	def test_starting_annual_exp
-		assert_equal(72200, @expenses_in.starting_annual_exp)
+		assert_equal(72000, @expenses_in.starting_annual_exp)
+	end
+	
+	def test_starting_partial_annual_exp
+		assert_equal(54000, @expenses_in.starting_annual_exp)
 	end
 	
 	def test_starting_annual_med_exp
 		assert_equal(12000, @expenses_in.starting_annual_med_exp)
 	end
 	
+	def test_starting_partial_annual_med_exp
+		assert_equal(9000, @expenses_in.starting_annual_med_exp)
+	end
+	
 	def test_final_annual_exp
 		results = [
-			[ 72200, 2011 ],
-			[ 74366, 2012 ],
-			[ 76597, 2013 ],  
-			[ 78895, 2014 ],
-			[ 88797, 2018 ],
-			[ 90261, 2019 ],
-			[ 104638, 2024 ],
-			[ 102035, 2028 ]
+			[ 54000, 2011 ],
+			[ 74160, 2012 ],
+			[ 88551, 2018 ],
+			[ 90008, 2019 ],
+			[ 104344, 2024 ],
+			[ 93074, 2025],
+			[ 101704, 2028 ]
 		]
 		results.each do |expense, year| 
 			assert_equal(expense, @expenses_in.annual_exp(year))
@@ -51,6 +58,7 @@ class TestExpenseMethods < Test::Unit::TestCase
   
 	def test_final_annual_med_exp
 		results = [
+			[ 9000, 2011 ],
 			[ 13997, 2013 ],
 			[ 15717, 2014 ],
 			[ 26937, 2021 ],
@@ -61,7 +69,13 @@ class TestExpenseMethods < Test::Unit::TestCase
 	end
 	
 	def test_gross_exp
-		assert_equal(98594, @expenses_in.gross_exp(2013))
-		assert_equal(148201, @expenses_in.gross_exp(2028))
+	    results = [
+			[ 63000, 2011 ],
+			[ 98382, 2013 ],
+			[ 147870, 2028 ],
+		]
+		results.each do |expense, year| 
+			assert_equal(expense, @expenses_in.gross_exp(year)) 
+		end
 	end
 end

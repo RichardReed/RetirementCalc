@@ -7,15 +7,16 @@ starting_spouse_ss: 1300
 starting_alc_pension: 400
 starting_ge_pension: 250
 
-#Added in the first year
+#Added in the first year with primary spouse death
 life_insurance: 10000
 
 #Starting savings
 starting_ira: 600000
 starting_non_ira: 50000
 
-#First Year/age
+#Year/age for start of finance change
 starting_year: 2011
+starting_month: 04
 birth_year: 1954
 six_mo_improv_start_age: 61
 navy_ret_start_age: 60
@@ -25,7 +26,7 @@ reduce_prop_tax_age: 65
 alc_pension_start_age: 63
 ge_pension_start_age: 62
 
-#Last Year/age
+#Year/age for stop of finance change
 last_yr_improv_work_age: 62
 house_payment_end_year: 2025
 
@@ -52,8 +53,8 @@ travel: 1100
 #total non-medical expenses: 5600
 
 #Single large annual expense
-large_annual_exp: 5000
-#total annual non-medical expenses: 72200
+large_annual_exp: 4800
+#total annual non-medical expenses: 72000
 
 #Multiple large one time income or expense (negative):  [year: amount]
 '2013': -8000  #large expense

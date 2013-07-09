@@ -11,6 +11,7 @@ class TestIncomeTaxMethods < Test::Unit::TestCase
 	
 	def test_income_tax
 		results = [
+			[ 19774, 2011],
 			[ 21783, 2012 ],
 			[ 35433, 2014 ],
 			[ 25155, 2016 ],
