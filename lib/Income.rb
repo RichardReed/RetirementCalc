@@ -77,22 +77,33 @@ class IncomeCalc
     end
 	
 	def gross_income(final_year)
-		improving_income(final_year) + navy_ret_income(final_year) +
+		gross_income = (improving_income(final_year) + navy_ret_income(final_year) +
 		ge_pension_income(final_year) + alc_pension_income(final_year) + 
         ss_income(final_year) + ss_spouse_income(final_year) + 
-		lump_sum_income(final_year)
+		lump_sum_income(final_year))
+		if final_year == @config_hash.config['starting_year']
+		    gross_income = gross_income * (13 - @config_hash.config['starting_month'])/12
+		else
+		return gross_income
+		end
 	end
 	
 	def pension_income(final_year)
 		navy_ret_income(final_year) + ge_pension_income(final_year) +
 		alc_pension_income(final_year) + ss_income(final_year) + 
 		ss_spouse_income(final_year)
+		if final_year == @config_hash.config['starting_year']
+		    pension_income = pension_income * (13 - @config_hash.config['starting_month'])/12
+		else
+		return pension_income
+		end
+
 	end
 
 private  
     def nonworking_income (final_year, starting_income, starting_year, raise)
         income = @config_hash.config[starting_income] * 12
-	
+	    partial_first_year = @config_hash.config[starting_income]
 		return 0 if final_year < starting_year
 
 		(starting_year + 1).upto(final_year) do 
@@ -100,5 +111,4 @@ private
 		end
 		return income
 	end
-
 end
