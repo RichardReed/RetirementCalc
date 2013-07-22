@@ -16,7 +16,7 @@ starting_non_ira: 50000
 
 #Year/age for start of finance change
 starting_year: 2011
-starting_month: 04
+starting_month: 4
 birth_year: 1954
 six_mo_improv_start_age: 61
 navy_ret_start_age: 60
@@ -61,7 +61,7 @@ large_annual_exp: 4800
 '2014': 9000   #large lump sum income
 
 #Misc changes
-ira_to_non_ira_xfer: 15000
+ira_to_non_ira_xfer: 14500
 property_tax_reduction: 1200
 mo_house_payment_reduction: 1200
 mo_med_exp_increase: 50

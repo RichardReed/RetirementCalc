@@ -12,13 +12,14 @@ class TestNonIRAMethods < Test::Unit::TestCase
 	
 	def test_non_ira_sav_spend
 		results = [
-			[ -983, 2011 ],
-			[ 23555, 2014 ],
-			[ -12047, 2015 ],
-			[ -12987, 2016 ],
-			[ -17753, 2017 ],
-			[ -21924, 2021 ],
-			[ -28300, 2028 ]
+			[ -396, 2011 ],
+			[ -3903, 2012 ],
+			[ 23898, 2014 ],
+			[ -11697, 2015 ],
+			[ -12630, 2016 ],
+			[ -17568, 2017 ],
+			[ -21732, 2021 ],
+			[ -28093, 2028 ]
 		]
 		results.each do |expense, year| 
 			assert_equal(expense, @non_ira_in.sav_spend(year))
@@ -27,12 +28,13 @@ class TestNonIRAMethods < Test::Unit::TestCase
 	
 	def test_non_ira_account
 		results = [
-			[ 60492, 2011 ],
-			[ 57793, 2012 ],
-			[ 84082, 2014 ],
-			[ 93021, 2017 ],
-			[ 80433, 2021 ],
-			[ 15977, 2028 ]
+			[ 61094, 2011 ],
+			[ 58621, 2012 ],
+			[ 85013, 2014 ],
+			[ 93388, 2017 ],
+			[ 79512, 2021 ],
+			[ 46795, 2025 ],
+			[ 12562, 2028 ]
 		]
 		results.each do |expense, year| 
 			assert_equal(expense, @non_ira_in.non_ira_account(year))

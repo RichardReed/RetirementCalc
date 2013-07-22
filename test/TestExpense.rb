@@ -18,16 +18,8 @@ class TestExpenseMethods < Test::Unit::TestCase
 		assert_equal(72000, @expenses_in.starting_annual_exp)
 	end
 	
-	def test_starting_partial_annual_exp
-		assert_equal(54000, @expenses_in.starting_annual_exp)
-	end
-	
 	def test_starting_annual_med_exp
 		assert_equal(12000, @expenses_in.starting_annual_med_exp)
-	end
-	
-	def test_starting_partial_annual_med_exp
-		assert_equal(9000, @expenses_in.starting_annual_med_exp)
 	end
 	
 	def test_final_annual_exp

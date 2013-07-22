@@ -16,7 +16,8 @@ class TestIncomeMethods < Test::Unit::TestCase
 	
 	def test_improving_income
 		results = [
-			[ 105000, 2012 ],
+			[ 105000, 2011 ],
+			[ 105000, 2013 ],
 			[ 70000, 2015 ],
 			[ 0, 2017 ]
 		]

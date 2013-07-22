@@ -21,10 +21,13 @@ class IncomeCalc
 		improving_9_mo_income = @config_hash.config['start_improv_hourly_pay'] * 1500
     improving_6_mo_income = @config_hash.config['start_improv_hourly_pay'] * 1000
 		
-		if final_year > last_improving_year then return 0 
-    elsif final_year >= year_start_working_6_mo then return improving_6_mo_income 
-    else return improving_9_mo_income
-    end
+		if final_year > last_improving_year  
+		    return 0 
+        elsif final_year >= year_start_working_6_mo  
+		    return improving_6_mo_income 
+        else 
+		    return improving_9_mo_income
+        end
 	end
 	
 
@@ -72,32 +75,21 @@ class IncomeCalc
         if @config_hash.config[final_year.to_s].to_i > 0
             lump_sum_income = (@config_hash.config[final_year.to_s].to_i)  
         else
-        lump_sum_income = 0
+            lump_sum_income = 0
         end
     end
 	
 	def gross_income(final_year)
-		gross_income = (improving_income(final_year) + navy_ret_income(final_year) +
+		(improving_income(final_year) + navy_ret_income(final_year) +
 		ge_pension_income(final_year) + alc_pension_income(final_year) + 
         ss_income(final_year) + ss_spouse_income(final_year) + 
-		lump_sum_income(final_year))
-		if final_year == @config_hash.config['starting_year']
-		    gross_income = gross_income * (13 - @config_hash.config['starting_month'])/12
-		else
-		return gross_income
-		end
+		lump_sum_income(final_year)) * partial_starting_year(final_year)
 	end
 	
 	def pension_income(final_year)
-		navy_ret_income(final_year) + ge_pension_income(final_year) +
+		(navy_ret_income(final_year) + ge_pension_income(final_year) +
 		alc_pension_income(final_year) + ss_income(final_year) + 
-		ss_spouse_income(final_year)
-		if final_year == @config_hash.config['starting_year']
-		    pension_income = pension_income * (13 - @config_hash.config['starting_month'])/12
-		else
-		return pension_income
-		end
-
+		ss_spouse_income(final_year)) * partial_starting_year(final_year)
 	end
 
 private  
@@ -110,5 +102,13 @@ private
 					income = (income * (1 + @config_hash.config[raise]/100.0)).round
 		end
 		return income
+	end
+	
+	def partial_starting_year (final_year)
+	    if final_year == @config_hash.config['starting_year']
+		    (13 - @config_hash.config['starting_month'])/12.to_f
+		else
+		    1
+		end
 	end
 end

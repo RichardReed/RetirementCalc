@@ -45,7 +45,7 @@ class NonIRA
 				non_ira_account_value = ((non_ira_account_value + sav_spend(year)) * (1 + interest)).round 
 			else
 				non_ira_account_value = ((non_ira_account_value + sav_spend(year) + ira_to_non_ira_xfer) * (1 + interest)).round 
-      end
+            end
 		end  #do
     return non_ira_account_value
 	end

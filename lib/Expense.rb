@@ -28,28 +28,28 @@ class ExpenseCalc
 	
 	def annual_exp(final_year)
 		this_year = @current_year + 1
-		annual_exp = starting_annual_exp
+		annual_exp = starting_annual_exp * partial_starting_year(final_year)
 		this_year.upto(final_year) do |this_year|
-			annual_exp = (annual_exp * (1 + @config_hash.config['expense_inflation']/100.0)).round
-      annual_exp -= (reduce_property_tax(this_year) + house_payment_end(this_year))
+			annual_exp = (annual_exp * (1 + @config_hash.config['expense_inflation']/100.0)).round 
+            annual_exp -= (reduce_property_tax(this_year) + house_payment_end(this_year))		
 		end #do
 		return annual_exp
 	end
   
-  def large_exp(final_year)  
-    if @config_hash.config[final_year.to_s].to_i < 0
-      large_exp = -(@config_hash.config[final_year.to_s].to_i)  #Expenses are negative.
-    else
-      large_exp = 0
+    def large_exp(final_year)  
+        if @config_hash.config[final_year.to_s].to_i < 0
+            large_exp = -(@config_hash.config[final_year.to_s].to_i)  #Expenses are negative.
+        else
+            large_exp = 0
+        end
     end
-  end
 	
 	def annual_med_exp(final_year)
 		this_year = @current_year + 1
-		annual_med_exp = starting_annual_med_exp
+		annual_med_exp = starting_annual_med_exp * partial_starting_year(final_year)
 		this_year.upto(final_year) do |this_year|
 			annual_med_exp = (annual_med_exp * (1 + @config_hash.config['med_exp_inflation']/100.0)).round
-      annual_med_exp += med_exp_increase(this_year)
+        annual_med_exp += med_exp_increase(this_year)
 		end #do
 		return annual_med_exp
 	end
@@ -59,27 +59,35 @@ class ExpenseCalc
 	end
   
   private
-  def reduce_property_tax(year)
+    def reduce_property_tax(year)
     	if year == @config_hash.config['reduce_prop_tax_age'].is_year
 				@config_hash.config['property_tax_reduction']
-      else
+        else
         0
-			end      
-  end
+		end      
+    end
   
-  def house_payment_end(year)
-  	if year == @config_hash.config['house_payment_end_year']
+    def house_payment_end(year)
+  	    if year == @config_hash.config['house_payment_end_year']
 			(@config_hash.config['mo_house_payment_reduction'] * 12)
-    else
-      0
-		end 
-  end
+        else
+            0
+	    end 
+    end
   
-  def med_exp_increase(year)
-  	if year == @config_hash.config['navy_ret_start_age'].is_year
+    def med_exp_increase(year)
+  	    if year == @config_hash.config['navy_ret_start_age'].is_year
 			(@config_hash.config['mo_med_exp_increase'] * 12)
-    else
-      0
-		end
-  end
+        else
+            0
+	    end
+    end
+	
+	def partial_starting_year (final_year)
+	    if final_year == @config_hash.config['starting_year']
+		    (13 - @config_hash.config['starting_month'])/12.to_f
+		else
+		    1
+	    end
+	end
 end
