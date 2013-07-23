@@ -20,9 +20,11 @@ class NonIRA
 	end
 	
 	def sav_spend(this_year)		
-		income_expenses = @income_in.gross_income(this_year) - @expenses_in.gross_exp(this_year)    
-		save_spend = @income_in.gross_income(this_year) - @expenses_in.gross_exp(this_year) - 
-						@income_tax_in.income_tax(this_year)    
+		income_expenses = @income_in.gross_income(this_year) - 
+		    @expenses_in.gross_exp(this_year)    
+		save_spend = @income_in.gross_income(this_year) -  
+		    @expenses_in.gross_exp(this_year) -  
+			@income_tax_in.income_tax(this_year)    
 		income_tax = -@income_tax_in.income_tax(this_year)
     
 		if this_year < 60.is_year
@@ -30,21 +32,24 @@ class NonIRA
 		elsif income_expenses > 0
 			return  save_spend
 		else
-		return income_tax
+		    return income_tax
 		end
 	end
 	
 	def non_ira_account(final_year)
 		this_year = @current_year
-		non_ira_account_value = @config_hash.config['starting_non_ira'] + @config_hash.config['life_insurance']
+		non_ira_account_value = @config_hash.config['starting_non_ira'] + 
+		    @config_hash.config['life_insurance']
 		ira_to_non_ira_xfer = @config_hash.config['ira_to_non_ira_xfer']
 		interest = @config_hash.config['savings_interest_rate']/100.0
 
 		this_year.upto(final_year) do |year|
 			if year.is_age < 60
-				non_ira_account_value = ((non_ira_account_value + sav_spend(year)) * (1 + interest)).round 
+				non_ira_account_value = ((non_ira_account_value + 
+				    sav_spend(year)) * (1 + interest)).round 
 			else
-				non_ira_account_value = ((non_ira_account_value + sav_spend(year) + ira_to_non_ira_xfer) * (1 + interest)).round 
+				non_ira_account_value = ((non_ira_account_value + 
+				    sav_spend(year) + ira_to_non_ira_xfer) * (1 + interest)).round 
             end
 		end  #do
     return non_ira_account_value

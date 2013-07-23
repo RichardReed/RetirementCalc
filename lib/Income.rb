@@ -17,9 +17,12 @@ class IncomeCalc
 	end
 	
 	def improving_income(final_year)
-    year_start_working_6_mo = @config_hash.config['six_mo_improv_start_age'].is_year
-		improving_9_mo_income = @config_hash.config['start_improv_hourly_pay'] * 1500
-    improving_6_mo_income = @config_hash.config['start_improv_hourly_pay'] * 1000
+        year_start_working_6_mo = 
+		    @config_hash.config['six_mo_improv_start_age'].is_year
+		improving_9_mo_income = 
+		    @config_hash.config['start_improv_hourly_pay'] * 1500
+        improving_6_mo_income = 
+		    @config_hash.config['start_improv_hourly_pay'] * 1000
 		
 		if final_year > last_improving_year  
 		    return 0 
@@ -36,7 +39,8 @@ class IncomeCalc
 	end
 		
 	def navy_ret_income(final_year)
-		nonworking_income(final_year, 'starting_navy_ret', navy_ret_start_year, 'navy_and_ss_raise')
+		nonworking_income(final_year, 'starting_navy_ret', 
+		    navy_ret_start_year, 'navy_and_ss_raise')
 	end
 	
 	def ge_pension_start_year
@@ -44,7 +48,8 @@ class IncomeCalc
 	end
 
 	def ge_pension_income(final_year)
-		nonworking_income(final_year, 'starting_ge_pension', ge_pension_start_year, 'ge_pension_raise')
+		nonworking_income(final_year, 'starting_ge_pension', 
+		    ge_pension_start_year, 'ge_pension_raise')
 	end
 	
 	def alc_pension_start_year
@@ -52,7 +57,8 @@ class IncomeCalc
 	end
 
 	def alc_pension_income(final_year)
-		nonworking_income(final_year, 'starting_alc_pension', alc_pension_start_year, 'alc_pension_raise')
+		nonworking_income(final_year, 'starting_alc_pension', 
+		    alc_pension_start_year, 'alc_pension_raise')
 	end
 	
 	def ss_start_year
@@ -60,7 +66,8 @@ class IncomeCalc
 	end
 
 	def ss_income(final_year)
-		nonworking_income(final_year, 'starting_ss', ss_start_year, 'navy_and_ss_raise')
+		nonworking_income(final_year, 'starting_ss', ss_start_year, 
+		    'navy_and_ss_raise')
 	end
 	
 	def ss_spouse_start_year
@@ -68,7 +75,8 @@ class IncomeCalc
 	end
 
 	def ss_spouse_income(final_year)
-		nonworking_income(final_year, 'starting_spouse_ss', ss_spouse_start_year, 'navy_and_ss_raise')
+		nonworking_income(final_year, 'starting_spouse_ss', 
+		    ss_spouse_start_year, 'navy_and_ss_raise')
 	end
   
     def lump_sum_income(final_year)  
