@@ -78,8 +78,10 @@ class TestIncomeMethods < Test::Unit::TestCase
 	def test_ss_income
 		results = [
 			[ 0, 2023 ],
-			[ 28800, 2024 ],
-			[ 31174, 2028 ]
+			[ 36000, 2024 ],
+			[ 36720, 2025 ],
+			[ 29963, 2026 ],
+			[ 31173, 2028 ]
 		]
 		results.each do |expense, year| 
 			assert_equal(expense, @income_in.ss_income(year))
@@ -94,7 +96,9 @@ class TestIncomeMethods < Test::Unit::TestCase
 		results = [
 			[ 0, 2019 ],
 			[ 15600, 2020 ],
-			[ 18277, 2028 ]
+			[ 17224, 2025 ],
+			[ 14054, 2026 ],
+			[ 14621, 2028 ]
 		]
 		results.each do |expense, year| 
 			assert_equal(expense, @income_in.ss_spouse_income(year))
@@ -111,7 +115,7 @@ class TestIncomeMethods < Test::Unit::TestCase
 			assert_equal(expense, @income_in.lump_sum_income(year))
 		end		
 	end
-	
+
 	def test_gross_income
 		results = [
 			[ 78750, 2011 ],
@@ -121,8 +125,9 @@ class TestIncomeMethods < Test::Unit::TestCase
 			[ 114200, 2016 ],
 			[ 49869, 2017 ],
 			[ 68324, 2020 ],
-			[ 102482, 2024 ],
-			[ 110641, 2028 ]
+			[ 109682, 2024 ],
+			[ 102968, 2026 ],
+			[ 106984, 2028 ]
 		]
 		results.each do |expense, year| 
 			assert_equal(expense, @income_in.gross_income(year))

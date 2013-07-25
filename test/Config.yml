@@ -2,7 +2,8 @@
 #Starting monthly income level
 start_improv_hourly_pay: 70
 starting_navy_ret: 3300
-starting_ss: 2400
+starting_ss: 3000
+ss_reduction_percent: 80
 starting_spouse_ss: 1300
 starting_alc_pension: 400
 starting_ge_pension: 250
@@ -22,6 +23,7 @@ six_mo_improv_start_age: 61
 navy_ret_start_age: 60
 ss_start_age: 70
 ss_spouse_start_age: 66
+ss_reduction_year: 2026
 reduce_prop_tax_age: 65
 alc_pension_start_age: 63
 ge_pension_start_age: 62
