@@ -23,22 +23,15 @@ Age 60 and after, if income > expenses, the excess goes into non-IRA.
 
 Age 60 and after, if expenses > income, the shortfall is withdrawn from IRA. The exception is that money to pay income_tax is withdrawn from non-IRA savings.
 
-Age 60 and after, a set amount is transferred from IRA to non-IRA each year.  This is taxed and withdrawn from non-IRA with other income taxes.  This money is adjusted to cause both IRA and non-IRA funds to run out the same year.
+Age 60 and after, a set amount is transferred from IRA to non-IRA each year.  This is taxed and the taxes are withdrawn from the non-IRA along with other income taxes.  This money should be adjusted to so both IRA and non-IRA funds to run out the same year.
 
-Gross_Income = Improving_income + Navy_pension + GE_pension + Alcatel_pension + SS + IRA Spending
-
-IRA_spend = Gross_income - gross_expenses (IRA_spend is always 0 or a negative value)
-
-IRA_Account = (last_years_IRA_Account + IRA_Spend_Save - ira_to_non_ira_xfer) * (1 + interest_rate)
 No Savings goes into the IRA account -> Any savings goes to non-IRA 
 
-non-IRA_Account = (non-IRA_account - Income_taxes) * (1 + interest_rate)
-
-Income_tax = (improving_income * (tax_rate + 7.65%)) + ((GE_pension + Alcatel_Pension + SS + Navy_pension + IRA_spending) * tax_rate)
-
-
 TESTING
-	Testing is based on the results from fictious numbers run through TestCalculations.xlsx.  Provided the program results are within +/- $2 of the spread sheet, I consider the program correct.
+	Testing is based on the results from numbers run through TestCalculations.xlsx.  Provided the program results are within +/- $2 of the spread sheet, I consider the program correct.
+
+BUGS
+The IRA Account value is off by $3 at age 72, which increases to $64 at age 92.  There is probably a bug causing this, but the small amount has a neglegable affect on the results.
 
 
 
