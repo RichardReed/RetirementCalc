@@ -35,4 +35,4 @@ class MoneyRanOut
 end
 
 @money_ran_out = MoneyRanOut.new
-@money_ran_out.year_ran_out_of_money
+@money_ran_out.final_year_results

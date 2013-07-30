@@ -17,6 +17,7 @@ class TestIncomeTaxMethods < Test::Unit::TestCase
 			[ 25030, 2016 ],
 			[ 17568, 2017 ],
 			[ 21732, 2021 ],
+			[ 24987, 2026 ],
 			[ 28093, 2028 ]
 		]
 		results.each do |expense, year| 
