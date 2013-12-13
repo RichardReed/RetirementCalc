@@ -21,23 +21,26 @@ class Results
     end
 
     def results_for(final_age_year)
-        if final_age_year < 120
-            final_year = final_age_year.is_year
-            final_age = final_age_year
+        if final_age_year < 500
+           results_saved(final_age_year.is_year, final_age_year)
         else
-            final_year = final_age_year
-            final_age = final_age_year.is_age
+           results_saved(final_age_year, final_age_year.is_age)
         end
+    end
+
+    private
+
+    def results_saved(final_year, final_age)
         results = File.open('Results.yml', 'w')
         YAML.dump({
-            :year => final_year,
-            :age => final_age,
-            :income => @income_in.gross_income(final_year),
-            :taxes => @income_tax_in.income_tax(final_year),
-            :exp_other_than_medical => @expenses_in.annual_exp(final_year),
-            :medical_expenses => @expenses_in.annual_med_exp(final_year),
-            :ira_savings => @ira_in.ira_account(final_year),
-            :non_ira_savings => @non_ira_in.non_ira_account(final_year) },
+            year:                   final_year,
+            age:                    final_age,
+            income:                 @income_in.gross_income(final_year),
+            taxes:                  @income_tax_in.income_tax(final_year),
+            exp_other_than_medical: @expenses_in.annual_exp(final_year),
+            medical_expenses:       @expenses_in.annual_med_exp(final_year),
+            ira_savings:            @ira_in.ira_account(final_year),
+            non_ira_savings:        @non_ira_in.non_ira_account(final_year) },
             results)
         results.close
     end
