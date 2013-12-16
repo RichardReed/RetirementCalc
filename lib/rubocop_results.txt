@@ -1,0 +1,138 @@
+Inspecting 19 files
+..CCCC.CCCCWW..CCCW
+
+Offences:
+
+Expense.rb:38:9: C: Redundant `return` detected.
+        return annual_exp
+        ^^^^^^
+Expense.rb:59:9: C: Redundant `return` detected.
+        return annual_med_exp
+        ^^^^^^
+Income.rb:18:5: C: Method has too many lines. [13/10]
+    def improving_income(final_year)
+    ^^^
+Income.rb:73:9: C: Redundant `return` detected.
+        return ss_income
+        ^^^^^^
+Income.rb:82:38: C: Align the parameters of a method call if they span more than one line.
+                                     ss_spouse_start_year, 'navy_and_ss_raise')
+                                     ^^^^^^^^^^^^^^^^^^^^
+Income.rb:88:9: C: Redundant `return` detected.
+        return ss_spouse_income
+        ^^^^^^
+Income.rb:123:9: C: Redundant `return` detected.
+        return income
+        ^^^^^^
+IncomeTax.rb:23:5: C: Method has too many lines. [15/10]
+    def payrole_tax(year)
+    ^^^
+IRA.rb:24:5: C: Redundant `return` detected.
+    return ira_spend
+    ^^^^^^
+IRA.rb:27:5: C: Method has too many lines. [14/10]
+    def ira_account(final_year)
+    ^^^
+IRA.rb:42:9: C: Redundant `return` detected.
+        return ira_account_value
+        ^^^^^^
+MoneyRanOut.rb:29:9: C: Redundant `return` detected.
+        return final_year
+        ^^^^^^
+non-IRA.rb:22:5: C: Method has too many lines. [13/10]
+    def sav_spend(this_year)
+    ^^^
+non-IRA.rb:39:5: C: Method has too many lines. [16/10]
+    def non_ira_account(final_year)
+    ^^^
+non-IRA.rb:56:5: C: Redundant `return` detected.
+    return non_ira_account_value
+    ^^^^^^
+Results-orig.rb:23:5: C: Method has too many lines. [19/10]
+    def results_for(final_age_year)
+    ^^^
+Results-orig.rb:33:13: C: Ruby 1.8 hash syntax detected
+            :year => final_year,
+            ^^^^^^^^
+Results-orig.rb:34:13: C: Ruby 1.8 hash syntax detected
+            :age => final_age,
+            ^^^^^^^
+Results-orig.rb:35:13: C: Ruby 1.8 hash syntax detected
+            :income => @income_in.gross_income(final_year),
+            ^^^^^^^^^^
+Results-orig.rb:36:13: C: Ruby 1.8 hash syntax detected
+            :taxes => @income_tax_in.income_tax(final_year),
+            ^^^^^^^^^
+Results-orig.rb:37:13: C: Ruby 1.8 hash syntax detected
+            :exp_other_than_medical => @expenses_in.annual_exp(final_year),
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+Results-orig.rb:38:13: C: Ruby 1.8 hash syntax detected
+            :medical_expenses => @expenses_in.annual_med_exp(final_year),
+            ^^^^^^^^^^^^^^^^^^^^
+Results-orig.rb:39:13: C: Ruby 1.8 hash syntax detected
+            :ira_savings => @ira_in.ira_account(final_year),
+            ^^^^^^^^^^^^^^^
+Results-orig.rb:40:13: C: Ruby 1.8 hash syntax detected
+            :non_ira_savings => @non_ira_in.non_ira_account(final_year) },
+            ^^^^^^^^^^^^^^^^^^^
+Results-orig.rb:41:13: C: Align the parameters of a method call if they span more than one line.
+            results)
+            ^^^^^^^
+Results.rb:30:1: C: Trailing whitespace detected.
+Results.rb:31:1: C: Indent private as deep as method definitions.
+private
+^^^^^^^
+Results.rb:31:1: C: Keep a blank line before and after private.
+private
+^^^^^^^
+Results.rb:32:1: C: Trailing whitespace detected.
+Results.rb:33:5: C: Method has too many lines. [12/10]
+    def results_saved(final_year, final_age)
+    ^^^
+Results.rb:44:13: C: Align the parameters of a method call if they span more than one line.
+            results)
+            ^^^^^^^
+ResultsToCommandLine.rb:7:13: C: Favor modifier while/until usage when you have a single-line body.
+            while line = file.gets
+            ^^^^^
+ResultsToCommandLine.rb:7:24: W: Assignment in condition - you probably meant to use ==.
+            while line = file.gets
+                       ^
+RetCalc.rb:11:5: C: Favor modifier while/until usage when you have a single-line body.
+    while line = file.gets
+    ^^^^^
+RetCalc.rb:11:16: W: Assignment in condition - you probably meant to use ==.
+    while line = file.gets
+               ^
+temp/Expense.rb:38:9: C: Redundant `return` detected.
+        return annual_exp
+        ^^^^^^
+temp/Expense.rb:59:9: C: Redundant `return` detected.
+        return annual_med_exp
+        ^^^^^^
+temp/Income.rb:18:5: C: Method has too many lines. [13/10]
+    def improving_income(final_year)
+    ^^^
+temp/Income.rb:73:9: C: Redundant `return` detected.
+        return ss_income
+        ^^^^^^
+temp/Income.rb:82:38: C: Align the parameters of a method call if they span more than one line.
+                                     ss_spouse_start_year, 'navy_and_ss_raise')
+                                     ^^^^^^^^^^^^^^^^^^^^
+temp/Income.rb:88:9: C: Redundant `return` detected.
+        return ss_spouse_income
+        ^^^^^^
+temp/Income.rb:123:9: C: Redundant `return` detected.
+        return income
+        ^^^^^^
+temp/IncomeTax.rb:23:5: C: Method has too many lines. [15/10]
+    def payrole_tax(year)
+    ^^^
+YearOrAge.rb:7:13: C: Favor modifier while/until usage when you have a single-line body.
+            while line = file.gets
+            ^^^^^
+YearOrAge.rb:7:24: W: Assignment in condition - you probably meant to use ==.
+            while line = file.gets
+                       ^
+
+19 files inspected, 45 offences detected
