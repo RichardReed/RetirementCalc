@@ -68,7 +68,7 @@ class IncomeCalc
                                       'navy_and_ss_raise')
         if final_year >= @config_hash.config['ss_reduction_year']
             ss_income = (ss_income *
-                   @config_hash.config['ss_reduction_percent'].to_f / 100).to_i
+                   @config_hash.config['ss_reduction_percent'].to_f / 100).round
         end
         return ss_income
     end
@@ -83,7 +83,7 @@ class IncomeCalc
         if final_year >= @config_hash .config['ss_reduction_year']
             ss_spouse_income = (ss_spouse_income *
                 @config_hash.config['ss_reduction_percent'].to_f /
-                             100).to_i
+                             100).round
         end
         return ss_spouse_income
     end

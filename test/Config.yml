@@ -56,7 +56,7 @@ alc_pension_raise: 1
 savings_interest_rate: 2.5
 
 #Monthly expenses:  
-home_util: 5000
+home_util: 4000
 rick_vicky: 0 
 groc_house: 0
 insurance: 0
@@ -65,13 +65,13 @@ car: 0
 home_upkeep: 0
 restaurant: 0
 pets: 0
-medical: 750
+medical: 1000
 travel: 0
 
 #Annual expense
-large_annual_exp: 12000
-ira_to_non_ira_xfer: 8600
+large_annual_exp: 2000
+ira_to_non_ira_xfer: 12600
 
 #Multiple large one time income or expense (negative):  [year: amount]
 '2015': -8000  #Major Expense
-'2018': 9000	#Could be life insurance
+'2018': 9000	#Could be life insurance payoff

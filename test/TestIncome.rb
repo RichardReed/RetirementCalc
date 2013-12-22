@@ -98,7 +98,7 @@ class TestIncomeMethods < Test::Unit::TestCase
 			[ 15600, 2020 ],
 			[ 17224, 2025 ],
 			[ 14054, 2026 ],
-			[ 20885, 2046 ]
+			[ 20886, 2046 ]
 		]
 		results.each do |expense, year| 
 			assert_equal(expense, @income_in.ss_spouse_income(year))
@@ -122,7 +122,7 @@ class TestIncomeMethods < Test::Unit::TestCase
             [ 43437, 2015 ],
 			[ 59896, 2018 ],
 			[ 109784, 2024 ],
-			[ 151265, 2046 ]
+			[ 151266, 2046 ]
 		]
 		results.each do |expense, year| 
 			assert_equal(expense, @income_in.gross_income(year))
