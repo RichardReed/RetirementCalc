@@ -10,26 +10,6 @@ class TestIncomeMethods < Test::Unit::TestCase
 		@income_in = IncomeCalc.new
 	end
 	
-	# def test_improving_end_year
-		# assert_equal(2016, @income_in.last_improving_year)
-	# end
-	
-	# def test_improving_income
-		# results = [
-			# [ 105000, 2011 ],
-			# [ 105000, 2013 ],
-			# [ 70000, 2015 ],
-			# [ 0, 2017 ]
-		# ]
-		# results.each do |expense, year| 
-			# assert_equal(expense, @income_in.improving_income(year))
-		# end
-	# end
-	
-	# # # # # # def test_navy_ret_start_year
-		# # # # # # assert_equal(2014, @income_in.navy_ret_start_year)
-	# # # # # # end
-	
 	def test_navy_ret_income
 		results = [
 			[ 39600, 2014 ],
@@ -40,10 +20,6 @@ class TestIncomeMethods < Test::Unit::TestCase
 			assert_equal(expense, @income_in.navy_ret_income(year))
 		end
 	end
-	
-	# def test_ge_pension_start_year
-		# assert_equal(2016, @income_in.ge_pension_start_year)
-	# end
 	
 	def test_ge_pension_income
 		results = [

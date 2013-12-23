@@ -15,7 +15,7 @@ class IncomeTax
     end
 
     def income_tax(year)
-        payrole_tax(year) + ss_tax(year)
+        payrole_tax(year)
     end
 
   private
@@ -51,9 +51,5 @@ class IncomeTax
     def income_calc(year)
         @income_in.gross_income(year) - @ira_spending.ira_spend(year)
         # Note:  IRA spending is a negative number
-    end
-
-    def ss_tax(year)
-        (@income_in.improving_income(year) * 0.0765).round
     end
 end

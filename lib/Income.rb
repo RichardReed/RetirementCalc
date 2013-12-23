@@ -11,43 +11,22 @@ class IncomeCalc
         @config_hash = ConfigFile.instance
     end
 
-    def last_improving_year
-        @config_hash.config['last_yr_improv_work_age'].is_year
-    end
-
-    def improving_income(final_year)
-        year_start_working_6_mo =
-                    @config_hash.config['six_mo_improv_start_age'].is_year
-        improving_9_mo_income =
-                    @config_hash.config['start_improv_hourly_pay'] * 1500
-        improving_6_mo_income =
-                    @config_hash.config['start_improv_hourly_pay'] * 1000
-
-        if final_year > last_improving_year
-            return 0
-        elsif final_year >= year_start_working_6_mo
-            return improving_6_mo_income
-        else
-            return improving_9_mo_income
-        end
-    end
-
     def navy_ret_start_year
-        @config_hash.config['navy_ret_start_age'].is_year
+        @config_hash.config['starting_year']
     end
 
     def navy_ret_income(final_year)
-        nonworking_income(final_year, 'starting_navy_ret',
-                          navy_ret_start_year, 'navy_and_ss_raise')
+        nonworking_income(final_year, 'starting_navy_ret', 
+                    navy_ret_start_year, 'navy_and_ss_raise')
     end
 
     def ge_pension_start_year
-        @config_hash.config['ge_pension_start_age'].is_year
+        @config_hash.config['starting_year']
     end
 
     def ge_pension_income(final_year)
         nonworking_income(final_year, 'starting_ge_pension',
-                          ge_pension_start_year, 'ge_pension_raise')
+                    ge_pension_start_year, 'ge_pension_raise')
     end
 
     def alc_pension_start_year
@@ -97,7 +76,7 @@ class IncomeCalc
     end
 
     def gross_income(final_year)
-        (improving_income(final_year) + navy_ret_income(final_year) +
+        (navy_ret_income(final_year) +
         ge_pension_income(final_year) + alc_pension_income(final_year) +
         ss_income(final_year) + ss_spouse_income(final_year) +
         lump_sum_income(final_year)) * partial_starting_year(final_year)

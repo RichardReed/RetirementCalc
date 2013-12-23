@@ -54,7 +54,6 @@ class ExpenseCalc
         this_year.upto(final_year) do |year|
             annual_med_exp = (annual_med_exp * (1 +
                 @config_hash.config['med_exp_inflation'] / 100.0)).round
-        annual_med_exp += med_exp_increase(year)
         end # do
         return annual_med_exp
     end
@@ -77,14 +76,6 @@ class ExpenseCalc
     def house_payment_end(year)
         if year == @config_hash.config['house_payment_end_year']
             (@config_hash.config['mo_house_payment_reduction'] * 12)
-        else
-            0
-        end
-    end
-
-    def med_exp_increase(year)
-        if year == @config_hash.config['navy_ret_start_age'].is_year
-            (@config_hash.config['mo_med_exp_increase'] * 12)
         else
             0
         end

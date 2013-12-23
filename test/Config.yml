@@ -11,15 +11,8 @@ starting_ira: 600000
 starting_non_ira: 60000
 
 #INCOME
-#  Improving Enterprises
-start_improv_hourly_pay: 10
-six_mo_improv_start_age: 50
-last_yr_improv_work_age: 51
-
 #  Navy Retirement
 starting_navy_ret: 3300
-navy_ret_start_age: 60
-mo_med_exp_increase: 0
 
 #  Social Security
 starting_ss: 3000
@@ -36,7 +29,6 @@ alc_pension_start_age: 63
 
 #  GE
 starting_ge_pension: 250
-ge_pension_start_age: 60
 
 #Added in the first year with primary spouse death
 life_insurance: 0
