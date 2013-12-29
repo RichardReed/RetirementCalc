@@ -9,11 +9,7 @@ class TestExpenseMethods < Test::Unit::TestCase
 		@config_hash = ConfigFile.instance
 		@expenses_in = ExpenseCalc.new
 	end
-	
-	def test_starting_exp
-		assert_equal(4000, @expenses_in.starting_monthly_exp)
-	end
-	
+
 	def test_starting_annual_exp
 		assert_equal(50000, @expenses_in.starting_annual_exp)
 	end

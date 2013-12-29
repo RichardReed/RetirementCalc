@@ -31,13 +31,11 @@ alc_pension_start_age: 63
 starting_ge_pension: 250
 
 #Added in the first year with primary spouse death
-life_insurance: 0
+#life_insurance: 0
 
 #Year/age for financial change
 reduce_prop_tax_age: 65
 property_tax_reduction: 1200
-house_payment_end_year: 2002
-mo_house_payment_reduction: 0
 
 #Annual increase in percent
 expense_inflation: 3
@@ -47,21 +45,13 @@ ge_pension_raise: 1.5
 alc_pension_raise: 1
 savings_interest_rate: 2.5
 
-#Monthly expenses:  
-home_util: 4000
-rick_vicky: 0 
-groc_house: 0
-insurance: 0
-pres_donat: 0
-car: 0
-home_upkeep: 0
-restaurant: 0
-pets: 0
-medical: 1000
-travel: 0
+#Monthly expenses:
+non-medical_exp: 4000  
+medical_exp: 1000
 
 #Annual expense
-large_annual_exp: 2000
+travel_exp: 700
+large_annual_exp: 1300
 ira_to_non_ira_xfer: 12600
 
 #Multiple large one time income or expense (negative):  [year: amount]

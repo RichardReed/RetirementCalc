@@ -10,20 +10,14 @@ class ExpenseCalc
         @current_year = @config_hash.config['starting_year']
     end
 
-    def starting_monthly_exp
-        @config_hash.config['home_util'] + @config_hash.config['rick_vicky'] +
-        @config_hash.config['groc_house'] + @config_hash.config['insurance'] +
-        @config_hash.config['pres_donat'] + @config_hash.config['car'] +
-        @config_hash.config['home_upkeep'] + @config_hash.config['pets'] +
-        @config_hash.config['restaurant'] + @config_hash.config['travel']
-    end
-
     def starting_annual_exp
-        (starting_monthly_exp * 12) + @config_hash.config['large_annual_exp']
+        @config_hash.config['non-medical_exp'] * 12 + 
+        @config_hash.config['large_annual_exp'] + 
+        @config_hash.config['travel_exp']
     end
 
     def starting_annual_med_exp
-        @config_hash.config['medical'] * 12
+        @config_hash.config['medical_exp'] * 12
     end
 
     def annual_exp(final_year)
@@ -32,8 +26,7 @@ class ExpenseCalc
         this_year.upto(final_year) do |year|
             annual_exp = (annual_exp * (1 +
                 @config_hash.config['expense_inflation'] / 100.0)).round
-            annual_exp -= (reduce_property_tax(year) +
-                house_payment_end(year))
+            annual_exp -= (reduce_property_tax(year)) 
         end # do
         return annual_exp
     end
@@ -68,14 +61,6 @@ class ExpenseCalc
     def reduce_property_tax(year)
         if year == @config_hash.config['reduce_prop_tax_age'].is_year
             @config_hash.config['property_tax_reduction']
-        else
-            0
-        end
-    end
-
-    def house_payment_end(year)
-        if year == @config_hash.config['house_payment_end_year']
-            (@config_hash.config['mo_house_payment_reduction'] * 12)
         else
             0
         end

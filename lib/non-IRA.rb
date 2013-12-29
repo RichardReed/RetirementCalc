@@ -38,8 +38,7 @@ class NonIRA
 
     def non_ira_account(final_year)
         this_year = @current_year
-        non_ira_account_value = @config_hash.config['starting_non_ira'] +
-                                @config_hash.config['life_insurance']
+        non_ira_account_value = @config_hash.config['starting_non_ira'] 
         ira_to_non_ira_xfer = @config_hash.config['ira_to_non_ira_xfer']
         interest = @config_hash.config['savings_interest_rate'] / 100.0
 
