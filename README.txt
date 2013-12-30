@@ -1,5 +1,5 @@
 OVERVIEW
-	At this time, this program is very specific, for my retirement.  However I hope to make it more generic in the future.
+	At this time, this program is very specific, for my retirement.  However I hope to make it more generic in the future.  Program assumes the person is 60 or over.
 	
 HOW TO USE
 	To find out the year the sum of IRA savings and Non IRA savings is < 0, run MoneyRanOut.rb
@@ -17,21 +17,17 @@ Taxrate is based on (income + IRA Spending) as follows:
 	
 	The brackets include the standard deduction plus a single dependent.
 
-Before age 60, all excess expenses or savings come out of or go into non-IRA.
+If income > expenses, the excess goes into non-IRA.
 
-Age 60 and after, if income > expenses, the excess goes into non-IRA.
+If expenses > income, the shortfall is withdrawn from IRA. The exception is that money to pay income_tax is withdrawn from non-IRA savings.
 
-Age 60 and after, if expenses > income, the shortfall is withdrawn from IRA. The exception is that money to pay income_tax is withdrawn from non-IRA savings.
-
-Age 60 and after, a set amount is transferred from IRA to non-IRA each year.  This is taxed and the taxes are withdrawn from the non-IRA along with other income taxes.  This money should be adjusted to so both IRA and non-IRA funds to run out the same year.
+A set amount is transferred from IRA to non-IRA each year.  This is taxed and the taxes are withdrawn from the non-IRA along with other income taxes.  Adjusted this money so both IRA and non-IRA funds to run out the same year.
 
 No Savings goes into the IRA account -> Any savings goes to non-IRA 
 
 TESTING
 	Testing is based on the results from numbers run through TestCalculations.xlsx.  Provided the program results are within +/- $2 of the spread sheet, I consider the program correct.
 
-BUGS
-The IRA Account value is off by $3 at age 72, which increases to $64 at age 92.  There is probably a bug causing this, but the small amount has a neglegable affect on the results.
 
 
 
