@@ -13,7 +13,10 @@ class ExpenseCalc
     def starting_annual_exp
         @config_hash.config['non-medical_exp'] * 12 + 
         @config_hash.config['large_annual_exp'] + 
-        @config_hash.config['travel_exp']
+        @config_hash.config['travel_exp'] +
+        @config_hash.config['property_tax'] +
+        @config_hash.config['property_insurance'] +
+        @config_hash.config['country_place_dues']
     end
 
     def starting_annual_med_exp

@@ -30,6 +30,16 @@ alc_pension_start_age: 63
 #  GE
 starting_ge_pension: 250
 
+#TAXES
+bottom_bracket_min: 20300
+middle_bracket_min: 38250
+upper_bracket_min: 94100
+bottom_bracket_percent: 10
+middle_bracket_percent: 15
+upper_bracket_percent: 25
+middle_bracket_base_tax: 1815
+upper_bracket_base_tax: 10163
+
 #Added in the first year with primary spouse death
 #life_insurance: 0
 
@@ -50,9 +60,12 @@ non-medical_exp: 4000
 medical_exp: 1000
 
 #Annual expense
-travel_exp: 700
-large_annual_exp: 1300
+travel_exp: 500
+large_annual_exp: 600
 ira_to_non_ira_xfer: 12600
+property_tax: 200
+property_insurance: 300
+country_place_dues: 400
 
 #Multiple large one time income or expense (negative):  [year: amount]
 '2015': -8000  #Major Expense

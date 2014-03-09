@@ -17,6 +17,10 @@ class IncomeTax
     def income_tax(year)
         payrole_tax(year)
     end
+    
+    def taxable_income(year)
+        income(year)
+    end
 
   private
 
@@ -29,15 +33,24 @@ class IncomeTax
         end
 
         case income
-        when 0..19000
+        when 0..@config_hash.config['bottom_bracket_min']
             0
-        when 19001..36000
-            (0.1 * (income - 19000)).round
-        when 36001..88000
-            (1700 + 0.15 * (income - 36000)).round
+        when (@config_hash.config['bottom_bracket_min'] + 1)..@config_hash.config['middle_bracket_min']
+            (0.1 * (income - @config_hash.config['bottom_bracket_min'])).round
+        when (@config_hash.config['middle_bracket_min'] + 1)..@config_hash.config['upper_bracket_min']
+            (@config_hash.config['middle_bracket_base_tax'] + 0.15 * (income - @config_hash.config['middle_bracket_min'])).round
         else
-            (9500 + 0.25 * (income - 88000)).round
+            (@config_hash.config['upper_bracket_base_tax'] + 0.25 * (income - @config_hash.config['upper_bracket_min'])).round
         end
+        # when 0..19000
+            # 0
+        # when 19001..36000
+            # (0.1 * (income - 19000)).round
+        # when 36001..88000
+            # (1700 + 0.15 * (income - 36000)).round
+        # else
+            # (9500 + 0.25 * (income - 88000)).round
+        # end
     end
 
     def income(year)

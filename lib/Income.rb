@@ -66,6 +66,10 @@ class IncomeCalc
         end
         return ss_spouse_income
     end
+       
+    def gross_income(final_year)
+        pension_income(final_year) + lump_sum_income(final_year) * partial_starting_year(final_year)
+    end
 
     def lump_sum_income(final_year)
         if @config_hash.config[final_year.to_s].to_i > 0
@@ -73,13 +77,6 @@ class IncomeCalc
         else
             lump_sum_income = 0
         end
-    end
-
-    def gross_income(final_year)
-        (navy_ret_income(final_year) +
-        ge_pension_income(final_year) + alc_pension_income(final_year) +
-        ss_income(final_year) + ss_spouse_income(final_year) +
-        lump_sum_income(final_year)) * partial_starting_year(final_year)
     end
 
     def pension_income(final_year)

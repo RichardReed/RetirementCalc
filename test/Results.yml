@@ -2,8 +2,13 @@
 :year: 2028
 :age: 74
 :income: 107095
-:taxes: 17977
+:taxable_income: 121909
+:taxes: 17115
 :exp_other_than_medical: 74063
 :medical_expenses: 35246
+:large_ticket_items: 0
+:annual_expenses: 74063
+:total_spending: 109309
 :ira_savings: 411074
-:non_ira_savings: 144219
+:non_ira_savings: 154169
+:total_savings: 565243
