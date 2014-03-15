@@ -56,7 +56,16 @@ alc_pension_raise: 1
 savings_interest_rate: 2.5
 
 #Monthly expenses:
-non-medical_exp: 4000  
+home_util: 100
+rick_vicky: 200
+groc_house: 300
+insurance: 400
+pres_donat: 500
+car: 600
+home_upkeep: 700
+restaurant: 550
+pets: 650
+#total non-medical expenses: 4000
 medical_exp: 1000
 
 #Annual expense
