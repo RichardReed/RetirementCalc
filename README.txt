@@ -10,10 +10,10 @@ HOW TO USE
 
 CALCULATIONS
 Taxrate is based on (income + IRA Spending) as follows:
-	< $19,000:          0
-	$19,000 - $36,000:  10%
-	$36,000 - $88,000:  $1700 + 15% * income over $36,000
-	> $88,000:          $9500 + 25% * income over $88,000
+Up to $20,300 - 0%
+$20,301 to $38,250 - 10%
+$38,251 to $94,100 - $1815 + 15% of over $38,250
+Greater than $94,101 - $10,163 + 25% of over $94,100
 	
 	The brackets include the standard deduction plus a single dependent.
 
@@ -26,7 +26,7 @@ A set amount is transferred from IRA to non-IRA each year.  This is taxed and th
 No Savings goes into the IRA account -> Any savings goes to non-IRA 
 
 TESTING
-	Testing is based on the results from numbers run through TestCalculations.xlsx.  Provided the program results are within +/- $2 of the spread sheet, I consider the program correct.
+	Testing is based on the results from numbers run through TestCalculations.xlsx.  Provided the program results are within +/- $5 of the spread sheet, I consider the program correct.
 
 
 
