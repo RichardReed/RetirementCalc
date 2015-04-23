@@ -8,7 +8,7 @@ class ConfigFile
     include Singleton
     @@override = nil 
  
-    def self.set_config_override (hash)
+    def self.set_config_override hash
       @@override = hash               
     end                                
  
