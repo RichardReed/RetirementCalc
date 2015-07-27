@@ -6,7 +6,7 @@ require_relative '../lib/Expense'
 
 class TestExpenseMethods < Test::Unit::TestCase
 	def setup
-		@config_hash = ConfigFile.instance
+		@config_hash = ConfigFile.new
 		@expenses_in = ExpenseCalc.new
 	end
 

@@ -11,7 +11,7 @@ require_relative 'ResultsToCommandLine'
 
 class MoneyRanOut
     def initialize
-        @config_hash = ConfigFile.instance
+        @config_hash = ConfigFile.new
         @final_results = Results.new
         @write_results_to_command_line = ResultsToCommandLine.new
         @current_year = @config_hash.config['starting_year']

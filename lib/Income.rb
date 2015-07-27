@@ -8,7 +8,7 @@ require_relative 'AgeYear'
 class IncomeCalc
 
     def initialize
-        @config_hash = ConfigFile.instance
+        @config_hash = ConfigFile.new
     end
 
     def navy_ret_start_year

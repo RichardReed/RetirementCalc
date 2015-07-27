@@ -6,7 +6,7 @@ require_relative '../lib/Income'
 
 class TestIncomeMethods < Test::Unit::TestCase
 	def setup
-		@config_hash = ConfigFile.instance
+		@config_hash = ConfigFile.new
 		@income_in = IncomeCalc.new
 	end
 	

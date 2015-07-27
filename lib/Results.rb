@@ -11,7 +11,7 @@ require_relative 'non-IRA'
 class Results
 
     def initialize
-        @config_hash = ConfigFile.instance
+        @config_hash = ConfigFile.new
         @current_year = @config_hash.config['starting_year']
         @income_in = IncomeCalc.new
         @income_tax_in = IncomeTax.new

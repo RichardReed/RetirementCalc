@@ -5,14 +5,15 @@ require 'yaml'
 require 'test/unit'
 require_relative '../lib/Config'
  
-class TestConfigFile< Test::Unit::TestCase
+class TestConfigFile < Test::Unit::TestCase
   def setup
-    ConfigFile.set_config_override({ :test_config_entry => "some value" }) 
-    @config_hash = ConfigFile.instance
+    @config_file = ConfigFile.new
+    @config_file.set_config_override({ :test_config_entry => "some value" }) 
+    #@config_hash = ConfigFile.instance
   end
  
   def config_file_value
-    return @config_hash.config[:test_config_entry]
+    return @config_file.config[:test_config_entry]
   end
 
   def test_config_file

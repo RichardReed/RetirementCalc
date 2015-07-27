@@ -9,7 +9,7 @@ require_relative 'non-IRA'
 class IncomeTax
 
     def initialize
-        @config_hash = ConfigFile.instance
+        @config_hash = ConfigFile.new
         @income_in = IncomeCalc.new
         @ira_spending = IRA.new
     end

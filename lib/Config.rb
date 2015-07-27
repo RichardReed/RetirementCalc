@@ -1,18 +1,16 @@
 # Opens Config.yml file and loads the config hash
  
 require 'yaml'
-require 'singleton'
  
 class ConfigFile
-    attr_reader :config
-    include Singleton
     @@override = nil 
  
-    def self.set_config_override hash
+    def set_config_override (hash)
       @@override = hash               
+      return @@override
     end                                
  
-    def initialize
-        @config = @@override || YAML.load(File.open('CONFIG.yml')) 
+    def config
+        @config = @@override || YAML.load(File.open('Config.yml')) 
     end
 end

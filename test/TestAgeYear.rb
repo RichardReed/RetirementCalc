@@ -4,7 +4,7 @@ require_relative '../lib/AgeYear'
 class TestAgeYear < Test::Unit::TestCase
 
   def setup
-    @config_hash = ConfigFile.instance
+    @config_hash = ConfigFile.new
   end
 
   def test_is_age
