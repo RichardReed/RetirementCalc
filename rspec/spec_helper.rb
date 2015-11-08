@@ -3,6 +3,8 @@ require_relative '../lib/AgeYear'
 require_relative '../lib/Income'
 require_relative '../lib/Expense'
 require_relative '../lib/IRA'
+require_relative '../lib/non-IRA'
+require_relative '../lib/IncomeTax'
 
 #require 'unit_helper'
 #require 'user'
