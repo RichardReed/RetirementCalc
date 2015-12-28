@@ -22,7 +22,7 @@ class TestLastYearWithMoney < Test::Unit::TestCase
 		assert_equal(35963, @finalyr[:taxes])
 		assert_equal(102522, @finalyr[:exp_other_than_medical])
 		assert_equal(82179, @finalyr[:medical_expenses])
-		assert_equal(59436, @finalyr[:ira_savings])
-		assert_equal(31286, @finalyr[:non_ira_savings])
+		assert_equal(62795, @finalyr[:ira_savings])
+		assert_equal(31792, @finalyr[:non_ira_savings])
 	end
 end

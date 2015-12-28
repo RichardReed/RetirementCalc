@@ -151,7 +151,7 @@ describe "ss_income" do
 end
 
 describe "ss_spouse_income" do
-  context "with $1000 starting spouse's SS monthly income in the year 2000" do
+  context "with $1000 starting spouse's monthly SS in the year 2000" do
     before (:each) do
       @config_file = ConfigFile.new
       @config_file.set_config_override ({
@@ -192,6 +192,20 @@ describe "ss_spouse_income" do
   end
 end
 
+describe "gross_income" do
+  context "with $2000 from pension_income and $1000 lump_sum_income" do
+    before (:each) do
+      @income = IncomeCalc.new
+      allow(@income).to receive(:pension_income).and_return(2000)
+      allow(@income).to receive(:lump_sum_income).and_return(1000)
+      allow(@income).to receive(:life_insurance_income).and_return(3000)
+    end
+    it "returns $3000 for the first full year" do
+      expect(@income.gross_income(2000)).to eq(6000)
+    end
+  end
+end
+
 describe "lump_sum_income" do
   context "with $1000 lump sum income in the year 2020" do
     before (:each) do
@@ -213,6 +227,27 @@ describe "lump_sum_income" do
   end
 end
 
+describe "life_insurance_income" do
+  context "with $1000 life insurance income in the year 2020" do
+    before (:each) do
+      @config_file = ConfigFile.new
+      @config_file.set_config_override ({
+        "life_insurance" => 1000,
+        "life_insurance_year" =>2020 
+        })
+      @income = IncomeCalc.new
+    end
+    it "returns $1000 when year is 2020" do
+      expect(@income.life_insurance_income(2020)).to eq(1000)
+    end
+    it "returns $0 when year is 2019" do
+      expect(@income.life_insurance_income(2019)).to eq(0)
+    end
+    it "returns $0 when year is 2021" do
+      expect(@income.life_insurance_income(2021)).to eq(0)
+    end
+  end
+end
 describe "pension_income" do
   context "with $1000 from Navy, GE, Alcatel SS and Spouse SS" do
     before (:each) do

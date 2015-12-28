@@ -61,7 +61,8 @@ private
   end
 
   def income_calc(year)
-    @income_in.gross_income(year) - @ira_spending.ira_spend(year)
+    @income_in.gross_income(year) - @ira_spending.ira_spend(year) -\
+      @income_in.life_insurance_income(year)
     # Note:  IRA spending is a negative number
   end
 end

@@ -1,6 +1,4 @@
 # Calculate income for a specific year
-# Improving income starts with working 9 months (hourly pay * 1500)
-# Improving income after 'six_mo_work_start_age' is (hourly pay * 1000)
 
 require_relative 'Config'
 require_relative 'AgeYear'
@@ -59,7 +57,7 @@ class IncomeCalc
   def ss_spouse_income(final_year)
     ss_spouse_income = nonworking_income(final_year,
         'starting_spouse_ss',ss_spouse_start_year, 'navy_and_ss_raise')
-    if final_year >= @config_hash .config['ss_reduction_year']
+    if final_year >= @config_hash.config['ss_reduction_year']
          ss_spouse_income = (ss_spouse_income *
          @config_hash.config['ss_reduction_percent'].to_f / 100.0).round
     end
@@ -67,8 +65,8 @@ class IncomeCalc
   end
        
   def gross_income(final_year)
-    pension_income(final_year) + lump_sum_income(final_year) *
-               partial_starting_year(final_year)
+    pension_income(final_year) + lump_sum_income(final_year) +
+           life_insurance_income(final_year)
   end
 
   def lump_sum_income(final_year)
@@ -76,6 +74,14 @@ class IncomeCalc
       lump_sum_income = (@config_hash.config[final_year.to_s].to_i)
     else
       lump_sum_income = 0
+    end
+  end
+
+  def life_insurance_income(final_year)
+    if final_year == @config_hash.config['life_insurance_year'] 
+      life_insurance_income = (@config_hash.config['life_insurance'].to_i)
+    else
+      life_insurance_income = 0
     end
   end
 

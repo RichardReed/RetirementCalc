@@ -41,7 +41,7 @@ class Results
             exp_other_than_medical: @expenses_in.annual_exp(final_year),
             medical_expenses:       @expenses_in.annual_med_exp(final_year),
             large_ticket_items:     @expenses_in.large_exp(final_year),
-            annual_expenses:        @expenses_in.annual_exp(final_year),
+#            annual_expenses:        @expenses_in.annual_exp(final_year),
             total_spending:         @expenses_in.gross_exp(final_year),
             ira_savings:            @ira_in.ira_account(final_year),
             non_ira_savings:        @non_ira_in.non_ira_account(final_year),

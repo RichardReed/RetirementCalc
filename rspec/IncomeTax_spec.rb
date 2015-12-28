@@ -65,19 +65,20 @@ describe "taxable_income (this_year)" do
         "ira_to_non_ira_xfer" => 10000,
         })
       @taxes = IncomeTax.new
-      allow_any_instance_of(IncomeCalc).to receive(:gross_income).\
-         and_return(20000)
+      allow_any_instance_of(IncomeCalc).to receive_messages(
+                :life_insurance_income => 20000, :gross_income => 50000)
       allow_any_instance_of(IRA).to receive(:ira_spend).and_return(-5000)
     end
     context "with age of 60 (gross_income + IRA to non-IRA xfer"\
-            " - IRA_spending)" do
-      it "returns $35,000 income" do
-        expect(@taxes.taxable_income(2020)).to eq(35000)
+            " + IRA_spending - tax free life_insurance_income)" do
+      it "returns $45,000 income" do
+        expect(@taxes.taxable_income(2020)).to eq(45000)
       end
     end
-    context "with age of 59 (gross_income - IRA_spending)" do
-      it "returns $25,000 income" do
-        expect(@taxes.taxable_income(2019)).to eq(25000)
+    context "with age of 59 (gross_income + IRA_spending"\
+            " - tax free life_insurance_income)" do
+      it "returns $35,000 income" do
+        expect(@taxes.taxable_income(2019)).to eq(35000)
       end
     end
   end
