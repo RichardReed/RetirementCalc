@@ -11,6 +11,6 @@ class ConfigFile
     end                                
  
     def config
-        @config = @@override || YAML.load(File.open('Config.yml')) 
+        @config ||= @@override || YAML.load(File.open('Config.yml')) 
     end
 end
