@@ -18,11 +18,11 @@ class TestRetirementFundProgramAge < Test::Unit::TestCase
 	def test_retirement_fund_program_age
 		assert_equal(2044, @finalyr[:year])
 		assert_equal(90, @finalyr[:age])
-		assert_equal(145561, @finalyr[:income])
+		assert_equal(144782, @finalyr[:income])
 		assert_equal(49688, @finalyr[:taxes])
 		assert_equal(118852, @finalyr[:exp_other_than_medical])
 		assert_equal(120747, @finalyr[:medical_expenses])
-		assert_equal(-404748, @finalyr[:ira_savings])
-		assert_equal(-131665, @finalyr[:non_ira_savings])
+		assert_equal(-434467, @finalyr[:ira_savings])
+		assert_equal(-134577, @finalyr[:non_ira_savings])
 	end
 end

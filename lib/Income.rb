@@ -42,7 +42,7 @@ class IncomeCalc
 
   def ss_income(final_year)
     ss_income = nonworking_income(final_year, 'starting_ss', ss_start_year,
-                                      'navy_and_ss_raise')
+                'navy_and_ss_raise')
     if final_year >= @config_hash.config['ss_reduction_year']
       ss_income = (ss_income *
              @config_hash.config['ss_reduction_percent'].to_f / 100).round
@@ -50,20 +50,36 @@ class IncomeCalc
     return ss_income
   end
 
-  def ss_spouse_start_year
-    @config_hash.config['ss_spouse_start_age'].is_year
+  def spouse_ss_start_year
+    @config_hash.config['spouse_ss_age'].is_year
+  end
+
+  def new_spouse_ss_start_year
+    @config_hash.config['spouse_new_ss_age'].is_year
   end
 
   def ss_spouse_income(final_year)
-    ss_spouse_income = nonworking_income(final_year,
-        'starting_spouse_ss',ss_spouse_start_year, 'navy_and_ss_raise')
-    if final_year >= @config_hash.config['ss_reduction_year']
-         ss_spouse_income = (ss_spouse_income *
-         @config_hash.config['ss_reduction_percent'].to_f / 100.0).round
+    if final_year < new_spouse_ss_start_year
+      ss_spouse_income = nonworking_income(final_year,
+           'spouse_ss',spouse_ss_start_year, 'navy_and_ss_raise')
+      reduced_spouse_ss_income(final_year, ss_spouse_income)
+    else
+      ss_spouse_income = nonworking_income(final_year,
+            'spouse_new_ss',new_spouse_ss_start_year, 'navy_and_ss_raise')
+      reduced_spouse_ss_income(final_year, ss_spouse_income)
     end
-    return ss_spouse_income
   end
        
+  def reduced_spouse_ss_income(final_year, ss_spouse_income)
+    ss_reduction_year = @config_hash.config['ss_reduction_year']
+    if final_year >= ss_reduction_year
+      return (ss_spouse_income *
+           @config_hash.config['ss_reduction_percent'].to_f / 100.0).round
+    else
+      return ss_spouse_income
+    end
+  end
+
   def gross_income(final_year)
     pension_income(final_year) + lump_sum_income(final_year) +
            life_insurance_income(final_year)

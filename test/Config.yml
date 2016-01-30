@@ -22,9 +22,12 @@ starting_navy_ret: 3300
 
 #  Social Security
 starting_ss: 3000
-starting_spouse_ss: 1300
 ss_start_age: 70
-ss_spouse_start_age: 66
+spouse_ss: 1000
+spouse_ss_age: 66
+spouse_new_ss: 1300
+spouse_new_ss_age: 68
+
 # SS runs out of money
 ss_reduction_year: 2026
 ss_reduction_percent: 80
