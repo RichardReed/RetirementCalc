@@ -143,11 +143,11 @@ describe "initial_non-ira_account_value" do
         @config_file.config["debt_interest"] = 10
         expect(@non_ira.send(:initial_non_ira_account_value)).to eq(700)
       end
-      it "returns $770 with $200 debt, 10% interest for 3 years" do
+      it "returns $765 with $200 debt, 10% interest for 3.5 years" do
         @config_file.config["debt_amount"] = 200
-        @config_file.config["debt_years"] = 3
+        @config_file.config["debt_years"] = 3.5
         @config_file.config["debt_interest"] = 10
-        expect(@non_ira.send(:initial_non_ira_account_value)).to eq(770)
+        expect(@non_ira.send(:initial_non_ira_account_value)).to eq(765)
       end
     end
   end
