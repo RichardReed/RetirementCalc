@@ -1,4 +1,5 @@
-# For the specified year or age, places the results in the Results.yml file
+# For the specified year or age, this calls the method which produces each 
+# result of interest and places them in the Results.yml file
 
 require_relative 'Config'
 require_relative 'AgeYear'

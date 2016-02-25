@@ -1,14 +1,13 @@
 ---
-:year: 2039
-:age: 85
-:income: 132234
-:taxable_income: 197301
-:taxes: 35963
-:exp_other_than_medical: 102522
-:medical_expenses: 82179
+:year: 2014
+:age: 60
+:income: 31950.0
+:taxable_income: 59100.0
+:taxes: 4943
+:exp_other_than_medical: 37500.0
+:medical_expenses: 9000.0
 :large_ticket_items: 0
-:annual_expenses: 102522
-:total_spending: 184701
-:ira_savings: 59436
-:non_ira_savings: 31286
-:total_savings: 90722
+:total_spending: 46500.0
+:ira_savings: 587171
+:non_ira_savings: 69348
+:total_savings: 656519
