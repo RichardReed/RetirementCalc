@@ -15,10 +15,6 @@ describe "navy_ret_income" do
     it "returns $12,000 after 5 years with 0% raise" do
       expect(@income.navy_ret_income(2005)).to eq(12000)
     end
-    it "returns $9,000 after 9 months" do
-      @config_file.config["starting_month"] = 9
-      expect(@income.navy_ret_income(2000)).to eq(12000)
-    end
     context "with 10% raise" do
       it "returns $12,000 the first year" do
         @config_file.config["navy_and_ss_raise"] = 10
@@ -48,10 +44,6 @@ describe "ge_pension_income" do
     end
     it "returns $12,000 after 5 years with 0% raise" do
       expect(@income.ge_pension_income(2005)).to eq(12000)
-    end
-    it "returns $9,000 after 9 months" do
-      @config_file.config["starting_month"] = 9
-      expect(@income.ge_pension_income(2000)).to eq(12000)
     end
     context "with 10% raise" do
       it "returns $12,000 the first year" do
@@ -84,10 +76,6 @@ describe "alc_pension_income" do
     end
     it "returns $12,000 after 5 years with 0% raise" do
       expect(@income.alc_pension_income(2005)).to eq(12000)
-    end
-    it "returns $9,000 after 9 months" do
-      @config_file.config["starting_month"] = 9
-      expect(@income.alc_pension_income(2000)).to eq(12000)
     end
     context "with 10% raise" do
       it "returns $12,000 the first year" do
@@ -122,10 +110,6 @@ describe "ss_income" do
     end
     it "returns $12,000 after 5 years with 0% raise" do
       expect(@income.ss_income(2005)).to eq(12000)
-    end
-    it "returns $9,000 after 9 months" do
-      @config_file.config["starting_month"] = 9
-      expect(@income.ss_income(2000)).to eq(12000)
     end
     context "with 10% raise" do
       it "returns $12,000 the first year" do
@@ -165,10 +149,6 @@ describe "ss_spouse_income" do
     end
     it "returns $12,000/yr after 5 years with 0% raise" do
       expect(@income.ss_spouse_income(2005)).to eq(12000)
-    end
-    it "returns $9,000 after 9 months" do
-      @config_file.config["starting_month"] = 9
-      expect(@income.ss_spouse_income(2000)).to eq(12000)
     end
     context "with 10% raise" do
       it "returns $12,000 the first year" do
@@ -275,6 +255,9 @@ describe "pension_income" do
     it "returns $2500 for the last 6 months of the year" do
       @config_file.config["starting_month"] = 7 
       expect(@income.pension_income(2000)).to eq(2500)
+    end
+    it "returns $5000 for the 2nd year" do
+      expect(@income.pension_income(2001)).to eq(5000)
     end
   end
 end
