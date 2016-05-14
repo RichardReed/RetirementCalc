@@ -66,7 +66,6 @@ describe "non-ira_account" do
           "birth_year" => 1960, 
           "ira_to_non_ira_xfer" => 0,
           "savings_interest_rate" => 0, 
-          "ira_to_non_ira_xfer" => 0
           })
         @non_ira = NonIRA.new
         allow(@non_ira).to receive(:initial_non_ira_account_value).
