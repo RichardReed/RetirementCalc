@@ -10,7 +10,7 @@ class IncomeCalc
   end
 
   def navy_ret_start_year
-    @config_hash.config['starting_year']
+    @config_hash.config['navy_ret_start_age'].is_year
   end
 
   def navy_ret_income(final_year)
@@ -19,7 +19,7 @@ class IncomeCalc
   end
 
   def ge_pension_start_year
-    @config_hash.config['starting_year']
+    @config_hash.config['ge_pension_start_age'].is_year
   end
 
   def ge_pension_income(final_year)
@@ -43,11 +43,7 @@ class IncomeCalc
   def ss_income(final_year)
     ss_income = nonworking_income(final_year, 'starting_ss', ss_start_year,
                 'navy_and_ss_raise')
-    if final_year >= @config_hash.config['ss_reduction_year']
-      ss_income = (ss_income *
-             @config_hash.config['ss_reduction_percent'].to_f / 100).round
-    end
-    return ss_income
+    reduced_ss_income(final_year, ss_income)
   end
 
   def spouse_ss_start_year
@@ -62,21 +58,11 @@ class IncomeCalc
     if final_year < new_spouse_ss_start_year
       ss_spouse_income = nonworking_income(final_year,
            'spouse_ss',spouse_ss_start_year, 'navy_and_ss_raise')
-      reduced_spouse_ss_income(final_year, ss_spouse_income)
+      reduced_ss_income(final_year, ss_spouse_income)
     else
       ss_spouse_income = nonworking_income(final_year,
             'spouse_new_ss',new_spouse_ss_start_year, 'navy_and_ss_raise')
-      reduced_spouse_ss_income(final_year, ss_spouse_income)
-    end
-  end
-       
-  def reduced_spouse_ss_income(final_year, ss_spouse_income)
-    ss_reduction_year = @config_hash.config['ss_reduction_year']
-    if final_year >= ss_reduction_year
-      return (ss_spouse_income *
-           @config_hash.config['ss_reduction_percent'].to_f / 100.0).round
-    else
-      return ss_spouse_income
+      reduced_ss_income(final_year, ss_spouse_income)
     end
   end
 
@@ -118,6 +104,15 @@ private
       income = (income * (1 + @config_hash.config[raise] / 100.0)).round
     end
     return income
+  end
+
+  def reduced_ss_income(final_year, ss_income)
+    if final_year >= @config_hash.config['ss_reduction_year']
+      return (ss_income *
+           @config_hash.config['ss_reduction_percent'].to_f / 100.0).round
+    else
+      return ss_income
+    end
   end
 
   def partial_starting_year(final_year)

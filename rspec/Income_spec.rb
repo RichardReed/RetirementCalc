@@ -6,7 +6,8 @@ describe "navy_ret_income" do
       @config_file = ConfigFile.new
       @config_file.set_config_override ({
         "starting_navy_ret" => 1000,
-        "starting_year" => 2000,
+        "navy_ret_start_age" => 50,
+        "birth_year" => 1950,
         "starting_month" => 1,
         "navy_and_ss_raise" => 0
         })
@@ -25,7 +26,7 @@ describe "navy_ret_income" do
         expect(@income.navy_ret_income(2005)).to eq(19326)
       end
     end
-    it "returns $0 if final_year is before starting_year" do
+    it "returns $0 if final_year is before navy_ret_start_age" do
       expect(@income.navy_ret_income(1999)).to eq(0)
     end
   end
@@ -37,7 +38,8 @@ describe "ge_pension_income" do
       @config_file = ConfigFile.new
       @config_file.set_config_override ({
         "starting_ge_pension" => 1000,
-        "starting_year" => 2000,
+        "ge_pension_start_age" => 50,
+        "birth_year" => 1950,
         "ge_pension_raise" => 0
         })
       @income = IncomeCalc.new
@@ -55,7 +57,7 @@ describe "ge_pension_income" do
         expect(@income.ge_pension_income(2005)).to eq(19326)
       end
     end
-    it "returns $0 if final_year is before starting_year" do
+    it "returns $0 if final_year is before ge_pension_start_age" do
       expect(@income.ge_pension_income(1999)).to eq(0)
     end
   end
