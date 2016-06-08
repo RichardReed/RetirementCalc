@@ -1,4 +1,5 @@
 #Test LastYearWithMoney.rb
+#Also tests MoneyRanOut.rb
 
 require 'yaml'
 require 'test/unit'
@@ -23,6 +24,6 @@ class TestLastYearWithMoney < Test::Unit::TestCase
 		assert_equal(102522, @finalyr[:exp_other_than_medical])
 		assert_equal(82179, @finalyr[:medical_expenses])
 		assert_equal(40095, @finalyr[:ira_savings])
-		assert_equal(29219, @finalyr[:non_ira_savings])
+		assert_equal(32722, @finalyr[:non_ira_savings])
 	end
 end

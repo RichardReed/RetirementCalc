@@ -30,10 +30,10 @@ class TestNonIRAMethods < Test::Unit::TestCase
 
   def test_non_ira_account
     results = [
-      [ 69348, 2014 ],
-      [ 135427, 2024 ],
-      [ 116228, 2034 ],
-      [ -228848, 2046 ]
+      [ 79307, 2014 ],
+      [ 143631, 2024 ],
+      [ 120582, 2034 ],
+      [ -222083, 2046 ]
         ]
     results.each do |expense, year|
       assert_equal(expense, @non_ira_in.non_ira_account(year))

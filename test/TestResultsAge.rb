@@ -21,6 +21,6 @@ class TestRetirementFundProgramAge < Test::Unit::TestCase
     assert_equal(118852, @finalyr[:exp_other_than_medical])
     assert_equal(120747, @finalyr[:medical_expenses])
     assert_equal(-434467, @finalyr[:ira_savings])
-    assert_equal(-134577, @finalyr[:non_ira_savings])
+    assert_equal(-129536, @finalyr[:non_ira_savings])
   end
 end

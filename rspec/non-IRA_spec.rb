@@ -39,7 +39,8 @@ describe "non-ira_account" do
           "starting_year" => 2010,
           "birth_year" => 1960, 
           "ira_to_non_ira_xfer" => 0,
-          "savings_interest_rate" => 0 
+          "savings_interest_rate" => 0, 
+          "pretax_interest_rate_reduction" => 0.0
           })
         @non_ira = NonIRA.new
         allow(@non_ira).to receive(:initial_non_ira_account_value).
@@ -57,6 +58,11 @@ describe "non-ira_account" do
         @config_file.config["savings_interest_rate"] = 5
         expect(@non_ira.non_ira_account(2019)).to eq(1630)
       end
+      it "returns $1482 the 10th year with 5% interest and .2 reduction" do
+        @config_file.config["savings_interest_rate"] = 5
+        @config_file.config["pretax_interest_rate_reduction"] = 0.2
+        expect(@non_ira.non_ira_account(2019)).to eq(1482)
+      end
     end
     context "with initial age >=60 and initial non-IRA value of $1000" do
       before (:each) do
@@ -66,6 +72,7 @@ describe "non-ira_account" do
           "birth_year" => 1960, 
           "ira_to_non_ira_xfer" => 0,
           "savings_interest_rate" => 0, 
+          "pretax_interest_rate_reduction" => 0.0
           })
         @non_ira = NonIRA.new
         allow(@non_ira).to receive(:initial_non_ira_account_value).
@@ -96,7 +103,8 @@ describe "non-ira_account" do
           "birth_year" => 1960, 
           "ira_to_non_ira_xfer" => 0,
           "savings_interest_rate" => 0, 
-          "ira_to_non_ira_xfer" => 100
+          "ira_to_non_ira_xfer" => 100,
+          "pretax_interest_rate_reduction" => 0.0
           })
         @non_ira = NonIRA.new
         allow(@non_ira).to receive(:initial_non_ira_account_value).

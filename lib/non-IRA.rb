@@ -1,7 +1,10 @@
-# Calculate amount in non-IRA savings accounts.
+# Calculates amount in non-IRA savings accounts.
 # All spent savings is taken from non-IRA accounts before age 60.
 # All savings is put into non-IRA accounts at any time.
-# All taxes on money taken out of IRA accounts.
+# All income taxes are taken out of the non-IRA savings.
+# Calculates the amount of debt by computing the total to be repaid and
+# subtracting it from the initial non-IRA savings.
+# Interest for non-IRA savings is reduced 15% due to being taxed.
 
 require_relative 'Config'
 require_relative 'AgeYear'
@@ -40,7 +43,8 @@ class NonIRA
     this_year = @current_year
     non_ira_account_value = initial_non_ira_account_value
     ira_to_non_ira_xfer = @config_hash.config['ira_to_non_ira_xfer']
-    interest = @config_hash.config['savings_interest_rate'] / 100.0
+    interest = @config_hash.config['savings_interest_rate'] *
+      (1.0 - @config_hash.config['pretax_interest_rate_reduction']) / 100.0
 
     this_year.upto(final_year) do |year|
       if year.is_age < 60
