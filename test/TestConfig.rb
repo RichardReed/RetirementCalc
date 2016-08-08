@@ -1,5 +1,5 @@
-# This file tests the use of set_config_override to test values outside the 
-# the spreadsheet.
+# This file uses the set_config_override to test values are put in the 
+# @config hash.
 
 require 'yaml'
 require 'test/unit'
@@ -8,8 +8,8 @@ require_relative '../lib/Config'
 class TestConfigFile < Test::Unit::TestCase
   def setup
     @config_file = ConfigFile.new
-    @config_file.set_config_override({ :test_config_entry => "some value" }) 
-    #@config_hash = ConfigFile.instance
+    @config_file.set_config_override({ 
+          :test_config_entry => "some value"})
   end
  
   def config_file_value
