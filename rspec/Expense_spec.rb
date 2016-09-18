@@ -2,7 +2,7 @@ require_relative 'spec_helper'
 
 describe "starting_monthly_exp" do
   describe "adds_all_monthly_expenses except medical" do
-    context "with 9 expenses of $100 each" do
+    context "with 10 expenses of $100 each" do
       before (:each) do
         config_file = ConfigFile.new
         config_file.set_config_override ({ 
@@ -15,33 +15,36 @@ describe "starting_monthly_exp" do
           "home_upkeep" => 100,
           "restaurant" => 100,
           "pets" => 100,
+          "medical_exp" => 100,
+          "travel_exp" => 100
           })
         @expenses = ExpenseCalc.new
       end
 
-      it "returns $900" do
-        expect(@expenses.starting_monthly_exp).to eq(900)
+      it "returns $1000" do
+        expect(@expenses.starting_monthly_exp).to eq(1000)
       end
     end
   end
 end
 
 describe "starting_annual_exp" do
-  context "with $1000 for each of 6 annual expenses and $100 in monthly expenses" do
+  context "with $1000 for 4 annual expenses and $1200 in tot monthly exp" do
     before (:each) do
       config_file = ConfigFile.new
       config_file.set_config_override ({ 
         "large_annual_exp" => 1000,
         "travel_exp" => 1000,
         "property_tax" => 1000,
+        "medical_exp" => 1000,
         "property_insurance" => 1000,
         "country_place_dues" => 1000
         })
       @expenses = ExpenseCalc.new
       allow(@expenses).to receive(:starting_monthly_exp).and_return(100)
     end
-    it "returns $6200 expenses after 1 year" do
-      expect(@expenses.starting_annual_exp).to eq(6200)
+    it "returns $5200 expenses after 1 year" do
+      expect(@expenses.starting_annual_exp).to eq(5200)
     end
   end
 end

@@ -14,14 +14,13 @@ class ExpenseCalc
     @config_hash.config['home_util'] + @config_hash.config['rick_vicky'] + 
     @config_hash.config['groc_house'] + @config_hash.config['insurance'] + 
     @config_hash.config['pres_donat'] + @config_hash.config['car'] + 
-    @config_hash.config['home_upkeep'] + @config_hash.config['restaurant'] + 
-    @config_hash.config['pets'] 
+    @config_hash.config['home_upkeep'] + @config_hash.config['pets'] + 
+    @config_hash.config['restaurant'] + @config_hash.config['travel_exp']
   end
     
   def starting_annual_exp
     (starting_monthly_exp * 12) + 
     @config_hash.config['large_annual_exp'] + 
-    @config_hash.config['travel_exp'] +
     @config_hash.config['property_tax'] +
     @config_hash.config['property_insurance'] +
     @config_hash.config['country_place_dues']

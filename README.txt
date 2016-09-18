@@ -1,35 +1,33 @@
+Updated 6/23/2016
 OVERVIEW
-	At this time, this program is very specific, for my retirement.  However I hope to make it more generic in the future.  Program assumes the person is 60 or over.
+At this time, this program is very specific, for my retirement.  However I hope to make it more generic in the future.  Program assumes the person is 60 or over.
 	
-HOW TO USE
-	To find out the year the sum of IRA savings and Non IRA savings is < 0, run MoneyRanOut.rb
-	To find out the year prior to running out of money, run LastYearWithMoney.rb 
-	To get the summary of retirement funds for a specific year, run RetCalc.rb
-	Information from the last run is stored in Results.yml and displayed on command line
-	All income, expenses, starting savings, interest rates, etc are in Config.yml
+TO USE
+Fill out the parameters in the lib/Config.yml file.
+
+Some final results are displayed.  All the final results are recorded in the Results.yml file.
+ 
+OPTIONS TO RUN
+MoneyRanOut.rb - Calculates the year the sum of IRA savings and Non IRA savings is < 0
+
+LastYearWithMoney.rb - Calculates the year prior to running out of money  
+
+RetCalc.rb - Calculates the state of retirement funds for a specific year
+
+CsvResults.rb - Places the results of specific parameters into a csv file for the specified year range.  These can be put into a spread sheet and graphed.
 
 CALCULATIONS
-Taxrate is based on (income + IRA Spending) as follows:
-Up to $20,300 - 0%
-$20,301 to $38,250 - 10%
-$38,251 to $94,100 - $1815 + 15% of over $38,250
-Greater than $94,101 - $10,163 + 25% of over $94,100
-	
-	The brackets include the standard deduction plus a single dependent.
+Taxrate is income + IRA Spending, based on the IRA tax tables for Married filing jointly, assuming standard deductions.  These are in the Config.yml file and may be changed.
 
-If income > expenses, the excess goes into non-IRA.
+If in a specific year, income > expenses, the excess goes into non-IRA savings. (No savings goes into the IRA savings.)
 
-If expenses > income, the shortfall is withdrawn from IRA. The exception is that money to pay income_tax is withdrawn from non-IRA savings.
+If in a specific year, expenses > income, the shortfall is withdrawn from IRA savings. The exception is that money to pay income_tax is withdrawn from non-IRA savings.
 
-A set amount is transferred from IRA to non-IRA each year.  This is taxed and the taxes are withdrawn from the non-IRA along with other income taxes.  Adjusted this money so both IRA and non-IRA funds to run out the same year.
+A set amount is transferred from IRA to non-IRA each year.  This is taxed and the taxes are withdrawn from the non-IRA along with other income taxes.  I adjusted this money so both IRA and non-IRA funds to run out the same year.
 
-No Savings goes into the IRA account -> Any savings goes to non-IRA 
+non-IRA interest is reduced by an amount specified in the Config.yml file (15%) to adjust for income taxes.
 
 TESTING
-	Testing is based on the results from numbers run through TestCalculations.xlsx.  Provided the program results are within +/- $5 of the spread sheet, I consider the program correct.
+Ruby unit testing is based on the results from numbers run through TestCalculations.xlsx with the values in test/Config.yml.  Accepted program results are within +/- $2 of the spread sheet.
 
-
-
-
-
-
+Rspec testing is run on each calculation method using mocks for the Config.yml values.  Code coverage is at 100% calculated by SimpleCov.

@@ -14,9 +14,9 @@ class TestIncomeTaxMethods < Test::Unit::TestCase
       [ 8858, 2018 ],
       [ 8827, 2019 ],
       [ 9594, 2020 ],  
-      [ 10848, 2022 ],    # starts 25% tax bracket
-      [ 24200, 2033 ],
-      [ 56521, 2046 ]
+      [ 10849, 2022 ],    # starts 25% tax bracket
+      [ 24201, 2033 ],
+      [ 56522, 2046 ]
     ]
     results.each do |expense, year| 
       assert_equal(expense, @income_tax_in.income_tax(year))
