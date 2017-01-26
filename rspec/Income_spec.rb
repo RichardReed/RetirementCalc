@@ -5,15 +5,17 @@ describe "navy_ret_income" do
     before (:each) do
       @config_file = ConfigFile.new
       @config_file.set_config_override ({
-        "starting_navy_ret" => 1000,
-        "navy_ret_start_age" => 50,
         "birth_year" => 1950,
-        "starting_month" => 1,
-        "navy_and_ss_raise" => 0
+        "navy_and_ss_raise" => 0,
+        "married" => {
+          "starting_navy_ret" => 1000,
+          "navy_ret_start_age" => 50
+          }
         })
       @income = IncomeCalc.new
     end
     it "returns $12,000 after 5 years with 0% raise" do
+#puts "config file is: #{@config_file.config}"
       expect(@income.navy_ret_income(2005)).to eq(12000)
     end
     context "with 10% raise" do
@@ -37,10 +39,12 @@ describe "ge_pension_income" do
     before (:each) do
       @config_file = ConfigFile.new
       @config_file.set_config_override ({
-        "starting_ge_pension" => 1000,
-        "ge_pension_start_age" => 50,
         "birth_year" => 1950,
-        "ge_pension_raise" => 0
+        "ge_pension_raise" => 0,
+        "married" => {
+          "starting_ge_pension" => 1000,
+          "ge_pension_start_age" => 50
+          }
         })
       @income = IncomeCalc.new
     end
@@ -68,11 +72,12 @@ describe "alc_pension_income" do
     before (:each) do
       @config_file = ConfigFile.new
       @config_file.set_config_override ({
-        "starting_alc_pension" => 1000,
-        "starting_year" => 2000,
-        "alc_pension_start_age" => 50,
         "birth_year" => 1950,
-        "alc_pension_raise" => 0
+        "alc_pension_raise" => 0,
+        "married" => {
+          "starting_alc_pension" => 1000,
+          "alc_pension_start_age" => 50
+          }
         })
       @income = IncomeCalc.new
     end
@@ -100,13 +105,14 @@ describe "ss_income" do
     before (:each) do
       @config_file = ConfigFile.new
       @config_file.set_config_override ({
-        "starting_ss" => 1000,
-        "starting_year" => 2000,
-        "ss_start_age" => 50,
         "birth_year" => 1950,
-        "navy_and_ss_raise" => 0,
         "ss_reduction_year" => 2020,
-        "ss_reduction_percent" => 50
+        "ss_reduction_percent" => 50,
+        "navy_and_ss_raise" => 0,
+        "married" => {
+          "starting_ss" => 1000,
+          "ss_start_age" => 50
+          }
         })
       @income = IncomeCalc.new
     end
@@ -137,15 +143,17 @@ describe "ss_spouse_income" do
     before (:each) do
       @config_file = ConfigFile.new
       @config_file.set_config_override ({
-        "spouse_ss" => 1000,
         "starting_year" => 2000,
-        "spouse_ss_age" => 50,
         "birth_year" => 1950,
-        "navy_and_ss_raise" => 0,
         "ss_reduction_year" => 2020,
         "ss_reduction_percent" => 50,
-        "spouse_new_ss" => 2000,
-        "spouse_new_ss_age" => 75
+        "navy_and_ss_raise" => 0,
+        "married" => {
+          "spouse_ss" => 1000,
+          "spouse_ss_age" => 50,
+          "spouse_new_ss" => 2000,
+          "spouse_new_ss_age" => 75
+          }
         })
       @income = IncomeCalc.new
     end
@@ -174,7 +182,7 @@ describe "ss_spouse_income" do
     end
     it "returns $12,000/yr with new spouse ss of $2000/mo" +
         " and a 50% reduction the same year" do
-      @config_file.config["spouse_new_ss_age"] = 70
+      @config_file.config["married"]["spouse_new_ss_age"] = 70
       expect(@income.ss_spouse_income(2020)).to eq (12000)
     end
   end
@@ -184,7 +192,7 @@ describe "gross_income" do
   context "with $2000 from pension_income and $1000 lump_sum_income" do
     before (:each) do
       @income = IncomeCalc.new
-      allow(@income).to receive(:pension_income).and_return(2000)
+      allow(@income).to receive(:total_pension_income).and_return(2000)
       allow(@income).to receive(:lump_sum_income).and_return(1000)
       allow(@income).to receive(:life_insurance_income).and_return(3000)
     end
@@ -199,7 +207,9 @@ describe "lump_sum_income" do
     before (:each) do
       @config_file = ConfigFile.new
       @config_file.set_config_override ({
-        "2020" => 1000,
+        "married" => {
+          "2020" => 1000,
+           }
         })
       @income = IncomeCalc.new
     end
@@ -220,8 +230,10 @@ describe "life_insurance_income" do
     before (:each) do
       @config_file = ConfigFile.new
       @config_file.set_config_override ({
-        "life_insurance" => 1000,
-        "life_insurance_year" =>2020 
+        "widowed" => {
+          "life_insurance" => 1000,
+          "year_widowed" => 2020 
+          }
         })
       @income = IncomeCalc.new
     end
@@ -236,7 +248,8 @@ describe "life_insurance_income" do
     end
   end
 end
-describe "pension_income" do
+
+describe "total_pension_income" do
   context "with $1000 from Navy, GE, Alcatel SS and Spouse SS" do
     before (:each) do
       @config_file = ConfigFile.new
@@ -252,14 +265,14 @@ describe "pension_income" do
       allow(@income).to receive(:ss_spouse_income).and_return(1000)
     end
     it "returns $5000 for the first full year" do
-      expect(@income.pension_income(2000)).to eq(5000)
+      expect(@income.total_pension_income(2000)).to eq(5000)
     end
     it "returns $2500 for the last 6 months of the year" do
       @config_file.config["starting_month"] = 7 
-      expect(@income.pension_income(2000)).to eq(2500)
+      expect(@income.total_pension_income(2000)).to eq(2500)
     end
     it "returns $5000 for the 2nd year" do
-      expect(@income.pension_income(2001)).to eq(5000)
+      expect(@income.total_pension_income(2001)).to eq(5000)
     end
   end
 end
