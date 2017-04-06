@@ -11,11 +11,18 @@ class ExpenseCalc
   end
 
   def starting_monthly_exp
-    @config_hash.config['home_util'] + @config_hash.config['rick_vicky'] + 
-    @config_hash.config['groc_house'] + @config_hash.config['insurance'] + 
-    @config_hash.config['pres_donat'] + @config_hash.config['car'] + 
-    @config_hash.config['home_upkeep'] + @config_hash.config['pets'] + 
-    @config_hash.config['restaurant'] + @config_hash.config['travel_exp']
+    @config_hash.config['house_exp'] + 
+    @config_hash.config['trailer_exp'] + 
+    @config_hash.config['rv_park'] + 
+    @config_hash.config['rec_exp'] + 
+    @config_hash.config['non-trailer_vac'] +
+    @config_hash.config['car'] + 
+    @config_hash.config['groceries'] + 
+    @config_hash.config['restaurant'] + 
+    @config_hash.config['insurance'] + 
+    @config_hash.config['pres_donate'] + 
+    @config_hash.config['rick_vicky'] +
+    @config_hash.config['pets'] 
   end
     
   def starting_annual_exp
