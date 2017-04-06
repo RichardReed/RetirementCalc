@@ -1,11 +1,11 @@
-# Calculate widowed income for a specific year
+# Calculate widowed expenses for a specific year
 
 require_relative 'Config'
 require_relative 'AgeYear'
-require_relative 'Income'
+require_relative 'Expense'
 
-class WidowedIncome
-
+class WidowedExpense
+=begin
   def initialize
     @config_hash = ConfigFile.new
   end
@@ -28,4 +28,5 @@ class WidowedIncome
   def widowed_income_fract
     initial_widowed_income/initial_married_income.to_f
   end
+=end
 end

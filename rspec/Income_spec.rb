@@ -203,19 +203,36 @@ describe "lump_sum_income" do
       @config_file = ConfigFile.new
       @config_file.set_config_override ({
         "married" => {
-          "2020" => 1000
+          "2018" => -1000,
+          "2020" => 1000,
+          "2022" => 2000
+           },
+        "widowed" => {
+          "2022" => 500,
+          "2021" => 100,
+          "widowed_year" => 2022
            }
         })
       @income = IncomeCalc.new
     end
-    it "returns $1000 when final_year is 2020" do
+    it "while married, returns $1000 when final_year is 2020" do
       expect(@income.lump_sum_income(2020)).to eq(1000)
     end
-    it "returns $0 when final_year is 2019" do
+    it "while married, returns $0 when final_year is 2019" do
       expect(@income.lump_sum_income(2019)).to eq(0)
     end
-    it "returns $0 when final_year is 2021" do
+    it "while married, returns $0 when final_year is 2021" do
       expect(@income.lump_sum_income(2021)).to eq(0)
+    end
+    it "while married, returns $0 when final_year is 2018" +
+       " because lump_sum_income is negative" do
+      expect(@income.lump_sum_income(2018)).to eq(0)
+    end
+    it "while widowed, returns $500 when final_year is 2022" do
+      expect(@income.lump_sum_income(2022)).to eq(500)
+    end
+    it "while widowed, returns $0 when final_year is 2023" do
+      expect(@income.lump_sum_income(2023)).to eq(0)
     end
   end
 end

@@ -1,15 +1,14 @@
 require_relative 'spec_helper'
  
-# Simplifying the widowed income by using the initial value 
-# of all incomes with the exception of SS to calculate the 
-# widowed income fraction no matter what year they start in.
-# This fraction is then multiplied by the final married income to 
-# obtain the final widowed income.
-# puts "config file is: #{@config_file.config}"
+# Simplifying the widowed expenses by using the initial value 
+# of all expenses to calculate the 
+# widowed expense fraction no matter what year they start in.
+# This fraction is then multiplied by the final married expense to 
+# obtain the final widowed expense.
+#puts "config file is: #{@config_file.config}"
 
-describe "calculate initial widowed income" do
-  context "Use initial widow income values for all but SS.  " +
-    "For SS use the starting_ss" do
+describe "calculate initial annual widowed expenses" do
+  context "Use initial widow expense values.  " do
     before (:each) do
       @config_file = ConfigFile.new
       @config_file.set_config_override ({
@@ -27,8 +26,8 @@ describe "calculate initial widowed income" do
       expect(@widowed_income.initial_widowed_income).to eq(5700)
     end
   end
-  end
-
+end
+=begin
 describe "calculate initial married income" do
   context "Use initial married income values for all but SS.  " +
     "For SS use the sum of the starting_ss and spouse_new_ss" do
@@ -64,3 +63,4 @@ describe "claculate widowed income fraction" do
     end
   end
 end
+=end

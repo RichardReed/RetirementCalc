@@ -74,8 +74,13 @@ class IncomeCalc
   end
 
   def lump_sum_income(final_year)
-    if @config_hash.config['married'][final_year.to_s].to_i > 0
-      lump_sum_income = (@config_hash.config['married'][final_year.to_s].to_i)
+    if final_year < @config_hash.config['widowed']['widowed_year'] 
+      marital_status = 'married'
+    else
+      marital_status = 'widowed'
+    end
+    if @config_hash.config[marital_status][final_year.to_s].to_i > 0
+      lump_sum_income = (@config_hash.config[marital_status][final_year.to_s].to_i)
     else
       lump_sum_income = 0
     end
