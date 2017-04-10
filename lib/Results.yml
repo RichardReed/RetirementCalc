@@ -1,13 +1,13 @@
 ---
-:year: 2019
-:age: 65
-:income: 53849
-:taxable_income: 84995
-:taxes: 8827
-:exp_other_than_medical: 56763
-:medical_expenses: 17632
+:year: 2040
+:age: 86
+:income: 134076
+:taxable_income: 203283
+:taxes: 37459
+:exp_other_than_medical: 101930
+:medical_expenses: 88753
 :large_ticket_items: 0
-:total_spending: 74395
-:ira_savings: 473317
-:non_ira_savings: 109455
-:total_savings: 582772
+:total_spending: 190683
+:ira_savings: 46930
+:non_ira_savings: 37076
+:total_savings: 84006

@@ -1,4 +1,4 @@
-# Calculate IRA savings and spending.  Calculate amount in IRA accounts
+# Calculate IRA savings and spending.  Calculate amount in IRA account
 # No money is taken out of IRA before age 60.
 # No money is put into IRA at any time.
 
