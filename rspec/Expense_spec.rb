@@ -56,12 +56,12 @@ describe "starting_annual_med_exp" do
     before (:each) do
       config_file = ConfigFile.new
       config_file.set_config_override ({
-        "medical_exp" => 100
+        "medical" => 200
         })
       @expenses = ExpenseCalc.new
     end
-    it "returns $1200" do
-      expect(@expenses.starting_annual_med_exp).to eq(1200)
+    it "returns $2400" do
+      expect(@expenses.starting_annual_med_exp).to eq(2400)
     end
   end
 end

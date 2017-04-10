@@ -34,7 +34,7 @@ class ExpenseCalc
   end
 
   def starting_annual_med_exp
-    @config_hash.config['medical_exp'] * 12
+    @config_hash.config['medical'] * 12
   end
 
   def annual_exp(final_year)

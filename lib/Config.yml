@@ -39,9 +39,9 @@ savings_interest_rate: 2.5 # Percentage
 pretax_interest_rate_reduction: 0.15 #Used for calculating non-IRA savings
 
 # Social Security
-  starting_ss: 3000
-  spouse_ss: 1000
-  spouse_new_ss: 1300
+starting_ss: 3000
+spouse_ss: 1000
+spouse_new_ss: 1300
 
 # SS runs out of money
 ss_reduction_year: 2026
@@ -59,86 +59,42 @@ spouse_new_ss_age: 68
 alc_pension_start_age: 63
 ge_pension_start_age: 60
 
-#-----------------------------#
-#Married Incomes/Expenses
-married:
 #INCOME
 # Navy Retirement
-  starting_navy_ret: 3300
+starting_navy_ret: 3300
 
 # Alcatel
-  starting_alc_pension: 400
+starting_alc_pension: 400
 
 # GE
-  starting_ge_pension: 250
+starting_ge_pension: 250
 
 #EXPENSES
 # Monthly:
-  house_exp: 50
-  trailer_exp: 100
-  rv_park: 150
-  rec_exp: 200
-  non-trailer_vac: 250
-  car: 300
-  groceries: 350
-  restaurant: 400
-  insurance: 450
-  pres_donate: 500
-  rick_vicky: 550 
-  pets: 600
-#  total married non-medical expenses: $3950
-  medical: 1000
+house_exp: 50
+trailer_exp: 100
+rv_park: 150
+rec_exp: 200
+non-trailer_vac: 250
+car: 300
+groceries: 350
+restaurant: 400
+insurance: 450
+pres_donate: 500
+rick_vicky: 550 
+pets: 600
+#  total married non-medical expenses: $3900
+medical: 1000
 
 # Annual:
-  large_annual_exp: 600
-  property_tax: 200
-  property_insurance: 300
-  country_place_dues: 400
+large_annual_exp: 600
+property_tax: 200
+property_insurance: 300
+country_place_dues: 400
 
 # Multiple large one time income or expense (negative):  [year: amount]
-  '2015': -8000  #Major Expense
-  '2018': 9000
+'2015': -8000  #Major Expense
+'2018': 9000
 
-#-----------------------------#
-#Widowed Incomes/Expenses
-widowed:
-  widowed_year: 2019
-  life_insurance_year: 2019 #Use year_widowed for life_insurance_year 
-  life_insurance: 2000
-
-#INCOME
-# Navy Retirement
-  starting_navy_ret: 3300
-
-# Alcatel
-  starting_alc_pension: 400
-
-# GE
-  starting_ge_pension: 250
-
-#EXPENSES
-# Monthly:
-  house_exp: 50
-  trailer_exp: 100
-  rv_park: 150
-  rec_exp: 200
-  non-trailer_vac: 250
-  car: 300
-  groceries: 350
-  restaurant: 400
-  insurance: 450
-  pres_donate: 500
-  rick_vicky: 550 
-  pets: 600
-#  total widowed non-medical expenses: $3950
-  medical: 1000
-
-# Annual:
-  large_annual_exp: 600
-  property_tax: 200
-  property_insurance: 300
-  country_place_dues: 400
-
-# Multiple large one time income or expense (negative):  [year: amount]
-  '2015': -8000  #Major Expense
-  '2018': 9000
+life_insurance_year: 2019 #Use year_widowed for life_insurance_year 
+life_insurance: 2000

@@ -13,9 +13,7 @@ class ConfigFile
  
   def config
     @config ||= @@override || YAML.load(File.open('Config.yml')) 
-#    puts "Config hash is: #{@config}"
     if /=>nil/ =~ @config.to_s
-      puts "Config.yml file is missing a value" 
     else
       return @config
     end
