@@ -291,7 +291,7 @@ describe "total_pension_income" do
     it "returns $5000 for the 2nd year" do
       expect(@income.total_pension_income(2001)).to eq(5000)
     end
-    it "returns widowed income of $4000" do
+    it "returns widowed income of $2500" do
       expect(@income.total_pension_income(2005)).to eq(2500)
     end
   end

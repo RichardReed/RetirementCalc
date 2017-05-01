@@ -5,6 +5,7 @@ require_relative 'spec_helper'
 # widowed income fraction no matter what year they start in.
 # This fraction is then multiplied by the final married income to 
 # obtain the final widowed income.
+
 # puts "config file is: #{@config_file.config}"
 
 describe "calculate initial widowed income" do

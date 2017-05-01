@@ -2,37 +2,46 @@
 
 require_relative 'Config'
 require_relative 'AgeYear'
+require_relative 'WidowedExpense'
 
 class ExpenseCalc
 
   def initialize
     @config_hash = ConfigFile.new
+    @widowed_expense = WidowedExpense.new
     @current_year = @config_hash.config['starting_year']
   end
 
-  def starting_monthly_exp
-    @config_hash.config['home_util'] + @config_hash.config['rick_vicky'] + 
-    @config_hash.config['groc_house'] + @config_hash.config['insurance'] + 
-    @config_hash.config['pres_donat'] + @config_hash.config['car'] + 
-    @config_hash.config['home_upkeep'] + @config_hash.config['pets'] + 
-    @config_hash.config['restaurant'] + @config_hash.config['travel_exp']
+  def initial_monthly_exp
+    @config_hash.config['married']['house'] + 
+    @config_hash.config['married']['trailer'] + 
+    @config_hash.config['married']['rv_park'] + 
+    @config_hash.config['married']['recreation'] + 
+    @config_hash.config['married']['non-trailer_vac'] + 
+    @config_hash.config['married']['car'] + 
+    @config_hash.config['married']['groceries'] + 
+    @config_hash.config['married']['restaurant'] + 
+    @config_hash.config['married']['insurance'] + 
+    @config_hash.config['married']['pres_donate'] +
+    @config_hash.config['married']['rick_vicky'] + 
+    @config_hash.config['married']['pets']
   end
     
-  def starting_annual_exp
-    (starting_monthly_exp * 12) + 
-    @config_hash.config['large_annual_exp'] + 
-    @config_hash.config['property_tax'] +
-    @config_hash.config['property_insurance'] +
-    @config_hash.config['country_place_dues']
+  def initial_annual_exp
+    (initial_monthly_exp * 12) + 
+    @config_hash.config['married']['unexpected_exp'] + 
+    @config_hash.config['married']['property_tax'] +
+    @config_hash.config['married']['property_insurance'] +
+    @config_hash.config['married']['country_place_dues']
   end
 
-  def starting_annual_med_exp
-    @config_hash.config['medical_exp'] * 12
+  def initial_annual_med_exp
+    @config_hash.config['married']['medical'] * 12
   end
 
   def annual_exp(final_year)
     this_year = @current_year + 1
-    annual_exp = starting_annual_exp * partial_starting_year(final_year)
+    annual_exp = initial_annual_exp * partial_starting_year(final_year)
     this_year.upto(final_year) do |year|
       annual_exp = (annual_exp * (1 +
                 @config_hash.config['expense_inflation'] / 100.0)).round
@@ -52,7 +61,7 @@ class ExpenseCalc
 
   def annual_med_exp(final_year)
     this_year = @current_year + 1
-    annual_med_exp = starting_annual_med_exp *
+    annual_med_exp = initial_annual_med_exp *
                      partial_starting_year(final_year)
     this_year.upto(final_year) do |year|
       annual_med_exp = (annual_med_exp * (1 +
@@ -62,8 +71,14 @@ class ExpenseCalc
   end
 
   def gross_exp(final_year)
-    annual_exp(final_year) + annual_med_exp(final_year) +
-                    large_exp(final_year)
+    if final_year >= @config_hash.config['widowed']['widowed_year']
+      return (annual_exp(final_year) + annual_med_exp(final_year)) *
+             @widowed_expense.widowed_expense_fract +
+             large_exp(final_year)
+    else
+      return annual_exp(final_year) + annual_med_exp(final_year) +
+             large_exp(final_year)
+    end
   end
 
 private

@@ -1,32 +1,41 @@
-# Calculate widowed expenses for a specific year
+# Calculate widowed expenses for the initial year
 
 require_relative 'Config'
 require_relative 'AgeYear'
 require_relative 'Expense'
 
 class WidowedExpense
-=begin
-  def initialize
+
+   def initialize
     @config_hash = ConfigFile.new
+    @current_year = @config_hash.config['starting_year']
   end
 
-  def initial_widowed_income
-    @config_hash.config['starting_ss'] +
-    @config_hash.config['spouse_new_ss'] +
-    @config_hash.config['widowed']['starting_navy_ret'] +
-    @config_hash.config['widowed']['starting_alc_pension'] +
-    @config_hash.config['widowed']['starting_ge_pension'] 
-  end
+  def initial_widowed_monthly_exp
+    @config_hash.config['widowed']['house'] +
+    @config_hash.config['widowed']['trailer'] +
+    @config_hash.config['widowed']['rv_park'] +
+    @config_hash.config['widowed']['recreation'] +
+    @config_hash.config['widowed']['non-trailer_vac'] +
+    @config_hash.config['widowed']['car'] +
+    @config_hash.config['widowed']['groceries'] +
+    @config_hash.config['widowed']['restaurant'] +
+    @config_hash.config['widowed']['insurance'] +
+    @config_hash.config['widowed']['pres_donate'] +
+    @config_hash.config['widowed']['rick_vicky'] +
+    @config_hash.config['widowed']['pets'] +
+    @config_hash.config['widowed']['medical']
+   end
+ 
+   def initial_widowed_annual_exp
+     (initial_widowed_monthly_exp * 12) +
+    @config_hash.config['widowed']['unexpected_exp'] +
+    @config_hash.config['widowed']['property_tax'] +
+    @config_hash.config['widowed']['property_insurance'] +
+    @config_hash.config['widowed']['country_place_dues']
+   end
 
-  def initial_married_income
-    @config_hash.config['starting_ss'] +
-    @config_hash.config['married']['starting_navy_ret'] +
-    @config_hash.config['married']['starting_alc_pension'] +
-    @config_hash.config['married']['starting_ge_pension'] 
+  def widowed_expense_fract
+    initial_widowed_expense/initial_married_expense.to_f
   end
-  
-  def widowed_income_fract
-    initial_widowed_income/initial_married_income.to_f
-  end
-=end
 end
