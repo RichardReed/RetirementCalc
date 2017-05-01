@@ -1,0 +1,144 @@
+---
+# Used to test program against the TestCalculations spread sheet. 
+# For Widdowed testing.
+
+ira_to_non_ira_xfer: 12600
+
+#STARTING
+starting_year: 2014
+starting_month: 4
+birth_year: 1954
+
+#  Starting savings
+starting_ira: 666667 #($600,000 / 0.9)
+starting_non_ira: 80000 #($70,000 + $2000 starting debt)/0.9
+starting_savings_discount: 90   #Percentage of savings used in calculations.
+
+#  Starting debt of $2000
+debt_amount: 1818.18
+debt_interest: 5   #In percent
+debt_years: 4
+
+#TAXES
+bottom_bracket_min: 20300
+middle_bracket_min: 38250
+upper_bracket_min: 94100
+bottom_bracket_percent: 10
+middle_bracket_percent: 15
+upper_bracket_percent: 25
+middle_bracket_base_tax: 1815
+upper_bracket_base_tax: 10163
+
+#Annual increase in percent
+expense_inflation: 3
+med_exp_inflation: 8
+navy_and_ss_raise: 2
+ge_pension_raise: 1.5
+alc_pension_raise: 1
+savings_interest_rate: 2.5 # Percentage
+pretax_interest_rate_reduction: 0.15 #Used for calculating non-IRA savings
+
+# Social Security
+starting_ss: 3000
+spouse_ss: 1000
+spouse_new_ss: 1300
+
+# SS runs out of money
+ss_reduction_year: 2026
+ss_reduction_percent: 80
+
+#Property Tax Reduction
+reduce_prop_tax_age: 65
+property_tax_reduction: 1200
+
+#Starting age for Incomes
+navy_ret_start_age: 60
+ss_start_age: 70
+spouse_ss_age: 66
+spouse_new_ss_age: 68
+alc_pension_start_age: 63
+ge_pension_start_age: 60
+
+#-----------------------------#
+#Married Incomes/Expenses
+married:
+#INCOME
+# Navy Retirement
+  starting_navy_ret: 3300
+
+# Alcatel
+  starting_alc_pension: 400
+
+# GE
+  starting_ge_pension: 250
+
+#EXPENSES
+# Monthly:
+  house: 50
+  trailer: 100
+  rv_park: 150
+  recreation: 200
+  non-trailer_vac: 250
+  car: 300
+  groceries: 350
+  restaurant: 400
+  insurance: 450
+  pres_donate: 500
+  rick_vicky: 550 
+  pets: 600
+#  total married non-medical expenses: $3900
+  medical: 1000
+
+# Annual:
+  unexpected_exp: 600
+  property_tax: 200
+  property_insurance: 300
+  country_place_dues: 400
+
+# Multiple large one time income or expense (negative):  [year: amount]
+  '2015': -8000  #Major Expense
+  '2018': 9000
+
+#-----------------------------#
+#Widowed Incomes/Expenses
+widowed:
+  widowed_year: 2019
+  life_insurance_year: 2019 #Use year_widowed for life_insurance_year 
+  life_insurance: 2000
+
+#INCOME
+# Navy Retirement
+  starting_navy_ret: 3300
+
+# Alcatel
+  starting_alc_pension: 400
+
+# GE
+  starting_ge_pension: 250
+
+#EXPENSES
+# Monthly:
+  house: 40
+  trailer: 90
+  rv_park: 140
+  recreation: 190
+  non-trailer_vac: 240
+  car: 290
+  groceries: 340
+  restaurant: 390
+  insurance: 440
+  pres_donate: 490
+  rick_vicky: 540 
+  pets: 590
+#  total widowed non-medical expenses: $3780
+  medical: 900
+
+# Annual:
+  unexpected_exp: 500
+  property_tax: 100
+  property_insurance: 200
+  country_place_dues: 300
+
+# Multiple large one time income or expense (negative):  [year: amount]
+  '2015': -7000  #Major Expense
+  '2018': 8000
