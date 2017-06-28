@@ -50,10 +50,14 @@ class ExpenseCalc
       return annual_exp
   end
 
-  def large_exp(final_year)
-    if @config_hash.config[final_year.to_s].to_i < 0
-      large_exp = -(@config_hash.config[final_year.to_s].to_i)
-      # Expenses are negative.
+  def large_exp(final_year)   #Expenses are negative
+    if final_year >= @config_hash.config['widowed']['widowed_year'] && 
+         @config_hash.config['widowed'][final_year.to_s].to_i < 0 
+      large_exp = -(@config_hash.config['widowed'][final_year.to_s].to_i)
+    elsif
+      final_year < @config_hash.config['widowed']['widowed_year'] && 
+            @config_hash.config['married'][final_year.to_s].to_i < 0
+      large_exp = -(@config_hash.config['married'][final_year.to_s].to_i)
     else
       large_exp = 0
     end
@@ -72,14 +76,19 @@ class ExpenseCalc
 
   def gross_exp(final_year)
     if final_year >= @config_hash.config['widowed']['widowed_year']
-      return (annual_exp(final_year) + annual_med_exp(final_year)) *
-             @widowed_expense.widowed_expense_fract +
-             large_exp(final_year)
+      return ((annual_exp(final_year) + annual_med_exp(final_year)) *
+             widowed_expense_fract + large_exp(final_year)).round
     else
       return annual_exp(final_year) + annual_med_exp(final_year) +
              large_exp(final_year)
     end
   end
+
+def widowed_expense_fract
+  @widowed_expense.initial_widowed_annual_exp/
+        (initial_annual_exp + initial_annual_med_exp).to_f
+end
+
 
 private
 

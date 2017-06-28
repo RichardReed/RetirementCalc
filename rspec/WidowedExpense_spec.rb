@@ -2,7 +2,7 @@ require_relative 'spec_helper'
 require_relative '../lib/WidowedExpense'
  
 # Simplifying the widowed expenses by using the initial value 
-# of all expenses to calculate the 
+# of all expenses (including Medical and annual expenses) to calculate the 
 # widowed expense fraction no matter what year they start in.
 # This fraction is then multiplied by the final married expense to 
 # obtain the final widowed expense.
@@ -37,26 +37,11 @@ describe "calculate initial annual widowed expenses" do
         })
       @widowed_expense = WidowedExpense.new
     end
-    it "returns monthly widowed of $5,700" do
+    it "returns monthly widowed of $4,680" do
       expect(@widowed_expense.initial_widowed_monthly_exp).to eq(4680)
     end
-    it "returns annual widowed of $5,700" do
+    it "returns annual widowed of $57,260" do
       expect(@widowed_expense.initial_widowed_annual_exp).to eq(57260)
-    end
-  end
-end
-
-describe "claculate widowed expense fraction" do
-  context "with values for initial widowed and initial maried expense" do
-    before (:each) do
-      @widowed_expense = WidowedExpense.new
-      allow(@widowed_expense).to receive(:initial_widowed_expense)
-            .and_return(2000)
-      allow(@widowed_expense).to receive(:initial_married_expense)
-            .and_return(4000)
-    end
-    it "returns widowed expense fraction of 0.5" do
-      expect(@widowed_expense.widowed_expense_fract).to eq(0.5)
     end
   end
 end

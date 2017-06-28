@@ -2,7 +2,7 @@
 # Used to test program against the TestCalculations spread sheet. 
 # For Widdowed testing.
 
-ira_to_non_ira_xfer: 12600
+ira_to_non_ira_xfer: 9000
 
 #STARTING
 starting_year: 2014
@@ -14,7 +14,7 @@ starting_ira: 666667 #($600,000 / 0.9)
 starting_non_ira: 80000 #($70,000 + $2000 starting debt)/0.9
 starting_savings_discount: 90   #Percentage of savings used in calculations.
 
-#  Starting debt of $2000
+#  Starting debt with accumulated interest is $2000
 debt_amount: 1818.18
 debt_interest: 5   #In percent
 debt_years: 4
@@ -89,56 +89,56 @@ married:
 #  total married non-medical expenses: $3900
   medical: 1000
 
-# Annual:
+# Annual: $1500
   unexpected_exp: 600
   property_tax: 200
   property_insurance: 300
   country_place_dues: 400
 
 # Multiple large one time income or expense (negative):  [year: amount]
-  '2015': -8000  #Major Expense
-  '2018': 9000
+  '2015': -8000  #Major expense
+  '2018': 9000   #Lump sum income
 
 #-----------------------------#
 #Widowed Incomes/Expenses
 widowed:
-  widowed_year: 2019
-  life_insurance_year: 2019 #Use year_widowed for life_insurance_year 
+  widowed_year: 2030
+#  life_insurance_year: 2019 #Use year_widowed for life_insurance_year 
   life_insurance: 2000
 
 #INCOME
 # Navy Retirement
-  starting_navy_ret: 3300
+  starting_navy_ret: 1650
 
 # Alcatel
-  starting_alc_pension: 400
+  starting_alc_pension: 200
 
 # GE
-  starting_ge_pension: 250
+  starting_ge_pension: 125
 
 #EXPENSES
 # Monthly:
-  house: 40
-  trailer: 90
-  rv_park: 140
-  recreation: 190
-  non-trailer_vac: 240
-  car: 290
-  groceries: 340
-  restaurant: 390
-  insurance: 440
-  pres_donate: 490
-  rick_vicky: 540 
-  pets: 590
-#  total widowed non-medical expenses: $3780
-  medical: 900
+  house: 415
+  trailer: 50
+  rv_park: 75
+  recreation: 100
+  non-trailer_vac: 125 
+  car: 150
+  groceries: 175
+  restaurant: 200
+  insurance: 225
+  pres_donate: 250
+  rick_vicky:  275
+  pets: 300
+#  total widowed non-medical expenses: $2340 (Married x 0.6)
+  medical: 600
 
-# Annual:
-  unexpected_exp: 500
-  property_tax: 100
+# Annual: $900
+  unexpected_exp: 350
+  property_tax: 250
   property_insurance: 200
-  country_place_dues: 300
+  country_place_dues: 100
 
 # Multiple large one time income or expense (negative):  [year: amount]
-  '2015': -7000  #Major Expense
-  '2018': 8000
+  '2033': -5000  #Major expense
+  '2036': 6000   #Lump sum income

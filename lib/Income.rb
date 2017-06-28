@@ -80,7 +80,8 @@ class IncomeCalc
       marital_status = 'widowed'
     end
     if @config_hash.config[marital_status][final_year.to_s].to_i > 0
-      lump_sum_income = (@config_hash.config[marital_status][final_year.to_s].to_i)
+      lump_sum_income = 
+        (@config_hash.config[marital_status][final_year.to_s].to_i)
     else
       lump_sum_income = 0
     end
@@ -88,23 +89,28 @@ class IncomeCalc
 
   def life_insurance_income(final_year)
     if final_year == @config_hash.config['widowed']['widowed_year'] 
-      life_insurance_income = (@config_hash.config['widowed']['life_insurance'].to_i)
+      life_insurance_income = 
+        (@config_hash.config['widowed']['life_insurance'].to_i)
     else
       life_insurance_income = 0
     end
   end
 
   def total_pension_income(final_year)
-    pension_income = (navy_ret_income(final_year) + 
+    if final_year < @config_hash.config['widowed']['widowed_year'] 
+      pension_income = ((navy_ret_income(final_year) + 
                       ge_pension_income(final_year) +
                       alc_pension_income(final_year) + 
                       ss_income(final_year) +
                       ss_spouse_income(final_year)) * 
-                      partial_starting_year(final_year)
-    if final_year >= @config_hash.config['widowed']['widowed_year'] 
-      return (pension_income * @widowed_income.widowed_income_fract)
+                      partial_starting_year(final_year)).round
     else
-      return pension_income
+      pension_income = (((navy_ret_income(final_year) + 
+                      ge_pension_income(final_year) +
+                      alc_pension_income(final_year)) * 
+                      @widowed_income.widowed_pension_income_fract +
+                      ss_income(final_year)) *
+                      partial_starting_year(final_year)).round
     end
   end
 

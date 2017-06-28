@@ -262,7 +262,7 @@ describe "life_insurance_income" do
 end
 
 describe "total_pension_income" do
-  context "with $1000 from Navy, GE, Alcatel SS and Spouse SS" do
+  context "with pensions from Navy, GE, Alcatel, SS and Spouse SS" do
     before (:each) do
       @config_file = ConfigFile.new
       @config_file.set_config_override ({
@@ -273,26 +273,34 @@ describe "total_pension_income" do
           }
         })
       @income = IncomeCalc.new
-      allow(@income).to receive(:navy_ret_income).and_return(1000)
+      allow(@income).to receive(:navy_ret_income).and_return(700)
       allow(@income).to receive(:ge_pension_income).and_return(1000)
-      allow(@income).to receive(:alc_pension_income).and_return(1000)
-      allow(@income).to receive(:ss_income).and_return(1000)
-      allow(@income).to receive(:ss_spouse_income).and_return(1000)
-      allow_any_instance_of(WidowedIncome).to receive(:widowed_income_fract)
+      allow(@income).to receive(:alc_pension_income).and_return(1200)
+      allow(@income).to receive(:ss_income).and_return(2000)
+      allow(@income).to receive(:ss_spouse_income).and_return(500)
+      allow_any_instance_of(WidowedIncome)
+             .to receive(:widowed_pension_income_fract)
              .and_return(0.5)
     end
-    it "returns $5000 for the first full year" do
-      expect(@income.total_pension_income(2000)).to eq(5000)
+    it "returns $5400 for the first full year" do
+      expect(@income.total_pension_income(2000)).to eq(5400)
     end
-    it "returns $2500 for the last 6 months of the year" do
+    it "returns $2700 for the last 6 months of the year" do
       @config_file.config["starting_month"] = 7 
-      expect(@income.total_pension_income(2000)).to eq(2500)
+      expect(@income.total_pension_income(2000)).to eq(2700)
     end
-    it "returns $5000 for the 2nd year" do
-      expect(@income.total_pension_income(2001)).to eq(5000)
+    it "returns $5400 for the 2nd year" do
+      expect(@income.total_pension_income(2001)).to eq(5400)
     end
-    it "returns widowed income of $2500" do
-      expect(@income.total_pension_income(2005)).to eq(2500)
+    it "returns widowed income of $3450 when " +
+       "widowed_pension_income_fract is 0.5" do
+      expect(@income.total_pension_income(2005)).to eq(3450)
+    end
+    it "returns widowed income of $1725 when " +
+       "starting in month 7 and starting_year = widowed-year" do
+      @config_file.config["starting_year"] = 2005
+      @config_file.config["starting_month"] = 7 
+      expect(@income.total_pension_income(2005)).to eq(1725)
     end
   end
 end

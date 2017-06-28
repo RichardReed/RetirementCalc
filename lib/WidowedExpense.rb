@@ -34,8 +34,4 @@ class WidowedExpense
     @config_hash.config['widowed']['property_insurance'] +
     @config_hash.config['widowed']['country_place_dues']
    end
-
-  def widowed_expense_fract
-    initial_widowed_expense/initial_married_expense.to_f
-  end
 end
