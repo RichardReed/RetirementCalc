@@ -12,13 +12,15 @@ class TestIRAMethods < Test::Unit::TestCase
   def test_ira_spend
     results = [
       [ -13275, 2014 ],
-      [ -18575, 2019 ],
+      [ -20575, 2019 ],
       [ -13896, 2023 ],
       [ 0, 2024 ],
-      [ 0, 2026 ],
       [ 0, 2027 ],
       [ -211, 2028 ],
-      [ -112096, 2046 ]
+      [ -3118, 2029 ],
+      [ -3926, 2030 ],
+      [ -28355, 2038 ],
+      [ -70079, 2046]
     ]
     results.each do |expense, year| 
       assert_equal(expense, @ira_in.ira_spend(year))
@@ -27,14 +29,16 @@ class TestIRAMethods < Test::Unit::TestCase
   
   def test_ira_account
     results = [
-      [ 588478, 2014 ],
-      [ 494255, 2019 ],
-      [ 438140, 2024 ],
-      [ 436178, 2025 ],
-      [ 434167, 2026 ],
-      [ 432106, 2027 ],
-      [ 429777, 2028 ],
-      [ -592561, 2046 ]
+      [ 592168, 2014 ],
+      [ 515776, 2019 ],
+      [ 479133, 2023 ],
+      [ 481886, 2024 ],
+      [ 490566, 2027 ],
+      [ 493389, 2028 ],
+      [ 493303, 2029 ],
+      [ 492386, 2030 ],
+      [ 367623, 2038 ],
+      [ -71805, 2046 ]
     ]
     results.each do |expense, year| 
       assert_equal(expense, @ira_in.ira_account(year))

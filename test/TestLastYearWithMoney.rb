@@ -17,13 +17,13 @@ class TestLastYearWithMoney < Test::Unit::TestCase
   end
 	
   def test_last_year_with_money
-    assert_equal(2040, @finalyr[:year])
-    assert_equal(86, @finalyr[:age])
-    assert_equal(134076, @finalyr[:income])
-    assert_equal(37459, @finalyr[:taxes])
-    assert_equal(101930, @finalyr[:exp_other_than_medical])
-    assert_equal(88753, @finalyr[:medical_expenses])
-    assert_equal(46930, @finalyr[:ira_savings])
-    assert_equal(37076, @finalyr[:non_ira_savings])
+    assert_equal(2045, @finalyr[:year])
+    assert_equal(91, @finalyr[:age])
+    assert_equal(85781, @finalyr[:income])  #Gross Income
+    assert_equal(26174, @finalyr[:taxes])
+    assert_equal(118165, @finalyr[:exp_other_than_medical])
+    assert_equal(130407, @finalyr[:medical_expenses])
+    assert_equal(9025, @finalyr[:ira_savings])
+    assert_equal(54072, @finalyr[:non_ira_savings])
   end
 end

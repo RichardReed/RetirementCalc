@@ -2,11 +2,13 @@
 
 require_relative 'Config'
 require_relative 'AgeYear'
+require_relative 'WidowedIncome'
 
 class IncomeCalc
 
   def initialize
     @config_hash = ConfigFile.new
+    @widowed_income = WidowedIncome.new
   end
 
   def navy_ret_start_year
@@ -67,36 +69,59 @@ class IncomeCalc
   end
 
   def gross_income(final_year)
-    pension_income(final_year) + lump_sum_income(final_year) +
+    total_pension_income(final_year) + lump_sum_income(final_year) +
            life_insurance_income(final_year)
   end
 
   def lump_sum_income(final_year)
-    if @config_hash.config[final_year.to_s].to_i > 0
-      lump_sum_income = (@config_hash.config[final_year.to_s].to_i)
+    if final_year < @config_hash.config['widowed']['widowed_year'] 
+      marital_status = 'married'
+    else
+      marital_status = 'widowed'
+    end
+    if @config_hash.config[marital_status][final_year.to_s].to_i > 0
+      lump_sum_income = 
+        (@config_hash.config[marital_status][final_year.to_s].to_i)
     else
       lump_sum_income = 0
     end
   end
 
   def life_insurance_income(final_year)
-    if final_year == @config_hash.config['life_insurance_year'] 
-      life_insurance_income = (@config_hash.config['life_insurance'].to_i)
+    if final_year == @config_hash.config['widowed']['widowed_year'] 
+      life_insurance_income = 
+        (@config_hash.config['widowed']['life_insurance'].to_i)
     else
       life_insurance_income = 0
     end
   end
 
-  def pension_income(final_year)
-    (navy_ret_income(final_year) + ge_pension_income(final_year) +
-        alc_pension_income(final_year) + ss_income(final_year) +
-        ss_spouse_income(final_year)) * partial_starting_year(final_year)
+  def total_pension_income(final_year)
+    if final_year < @config_hash.config['widowed']['widowed_year'] 
+      pension_income = ((navy_ret_income(final_year) + 
+                      ge_pension_income(final_year) +
+                      alc_pension_income(final_year) + 
+                      ss_income(final_year) +
+                      ss_spouse_income(final_year)) * 
+                      partial_starting_year(final_year)).round
+    else
+      pension_income = (((navy_ret_income(final_year) + 
+                      ge_pension_income(final_year) +
+                      alc_pension_income(final_year)) * 
+                      @widowed_income.widowed_pension_income_fract +
+                      ss_income(final_year)) *
+                      partial_starting_year(final_year)).round
+    end
   end
 
 private
 
   def nonworking_income(final_year, starting_income, starting_year, raise)
-    income = @config_hash.config[starting_income] * 12
+    if @config_hash.config.has_key?(starting_income)
+      income = @config_hash.config[starting_income] * 12 
+    else
+      income =  @config_hash.config["married"][starting_income] * 12
+    end
 
     return 0 if final_year < starting_year
 
