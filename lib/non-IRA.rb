@@ -3,8 +3,10 @@
 # All savings is put into non-IRA accounts at any time.
 # All income taxes are taken out of the non-IRA savings.
 # Calculates the amount of debt by computing the total to be repaid and
-# subtracting it from the initial non-IRA savings.
+#   subtracting it from the initial non-IRA savings.
 # Interest for non-IRA savings is reduced 15% due to being taxed.
+# Total debt, including accumulated interest is subtracted 
+#   from the initial non-IRA savings amount.
 
 require_relative 'Config'
 require_relative 'AgeYear'

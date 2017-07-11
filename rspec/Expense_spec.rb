@@ -1,73 +1,80 @@
 require_relative 'spec_helper'
 
-describe "starting_monthly_exp" do
+describe "initial_monthly_exp" do
   describe "adds_all_monthly_expenses except medical" do
     context "with 12 expenses of $100 each" do
       before (:each) do
         config_file = ConfigFile.new
         config_file.set_config_override ({ 
-          "house_exp" => 100, 
-          "trailer_exp" => 100,
-          "rv_park" => 100,
-          "rec_exp" => 100,
-          "non-trailer_vac" => 100,
-          "car" => 100,
-          "groceries" => 100,    
-          "restaurant" => 100,
-          "insurance" => 100,
-          "pres_donate"=> 100,
-          "rick_vicky" => 100,
-          "medical" => 100,
-          "pets" => 100,
+         "married" => {
+           "house" => 100,
+           "trailer" => 100,
+           "rv_park" => 100,
+           "recreation" => 100,
+           "non-trailer_vac" => 100,
+           "car" => 100,
+           "groceries" => 100,
+           "restaurant" => 100,
+           "insurance" => 100,
+           "invalid_expense" => 100000,
+           "pres_donate" => 100,
+           "rick_vicky" => 100,
+           "pets" => 100,
+           "medical" => 100
+           }
           })
         @expenses = ExpenseCalc.new
       end
 
       it "returns $1200" do
-        expect(@expenses.starting_monthly_exp).to eq(1200)
+        expect(@expenses.initial_monthly_exp).to eq(1200)
       end
     end
   end
 end
 
-describe "starting_annual_exp" do
+describe "initial_annual_exp" do
   context "with $1000 for 4 annual expenses and $1200 in tot monthly exp" do
     before (:each) do
       config_file = ConfigFile.new
       config_file.set_config_override ({ 
-        "large_annual_exp" => 1000,
-        "travel_exp" => 1000,
-        "property_tax" => 1000,
-        "medical_exp" => 1000,
-        "property_insurance" => 1000,
-        "country_place_dues" => 1000
+        "married" => {
+          "unexpected_exp" => 1000,
+          "not_real_expense" => 1000,
+          "property_tax" => 1000,
+          "property_insurance" => 1000,
+          "country_place_dues" => 1000
+          }
         })
       @expenses = ExpenseCalc.new
-      allow(@expenses).to receive(:starting_monthly_exp).and_return(100)
+      allow(@expenses).to receive(:initial_monthly_exp).and_return(100)
     end
     it "returns $5200 expenses after 1 year" do
-      expect(@expenses.starting_annual_exp).to eq(5200)
+      expect(@expenses.initial_annual_exp).to eq(5200)
     end
   end
 end
 
-describe "starting_annual_med_exp" do
+describe "initial_annual_med_exp" do
   context "with $100 in medical expenses each month" do
     before (:each) do
       config_file = ConfigFile.new
       config_file.set_config_override ({
-        "medical" => 200
+        "married" => {
+          "medical" => 100,
+          "rick_vicky" => 100
+          }
         })
       @expenses = ExpenseCalc.new
     end
-    it "returns $2400" do
-      expect(@expenses.starting_annual_med_exp).to eq(2400)
+    it "returns $1200" do
+      expect(@expenses.initial_annual_med_exp).to eq(1200)
     end
   end
 end
 
 describe "annual_exp" do
-  context "with $1000 starting annual expenses" do
+  context "with $1000 initial annual expenses" do
     before (:each) do
       @config_file = ConfigFile.new
       @config_file.set_config_override ({
@@ -79,7 +86,7 @@ describe "annual_exp" do
         "birth_year" => 2000
       })
       @expenses = ExpenseCalc.new
-      allow(@expenses).to receive(:starting_annual_exp).and_return(1000)
+      allow(@expenses).to receive(:initial_annual_exp).and_return(1000)
     end
     it "returns $1000 after 1 year" do
       expect(@expenses.annual_exp(2020)).to eq(1000)
@@ -127,31 +134,58 @@ describe "annual_exp" do
 end
 
 describe "large_exp" do
-  context "with $1000 large expense for 2020" do
+  context "with widowed year of 2025," do
     before (:each) do
       @config_file = ConfigFile.new
-      @config_file.set_config_override ({ "2020" => -1000 })
+      @config_file.set_config_override ({ 
+        "married" => {
+          "2020" => -1000, 
+          "2015" => 2000, 
+          "2030" => -7000,
+          "2035" => 8000
+        },
+        "widowed" => {
+          "widowed_year" => 2025,
+          "2020" => -3000,
+          "2015" => 4000,
+          "2030" => -5000,
+          "2035" => 6000
+        }
+      })
       @expenses = ExpenseCalc.new
     end
-    it "returns $1000 for year 2020, and $0 for 2019 and 2021" do
+    it "it returns $1000 for the large married expense in the year 2020" + 
+       " and $0 for the years 2019 and 2021." do
       expect(@expenses.large_exp(2019)).to eq(0)
       expect(@expenses.large_exp(2020)).to eq(1000)
       expect(@expenses.large_exp(2021)).to eq(0)
+    end
+    it "returns $0 for 2015 when there is a large married income." do
+      expect(@expenses.large_exp(2015)).to eq(0)
+    end
+    it "returns $5000 for the large widowed expense in the year 2030" +
+       " and $0 for the years 2029 and 2031." do
+      expect(@expenses.large_exp(2029)).to eq(0)
+      expect(@expenses.large_exp(2030)).to eq(5000)
+      expect(@expenses.large_exp(2031)).to eq(0)
+    end
+    it "returns $0 for 2035 when there is a large widowed income." do
+      expect(@expenses.large_exp(2035)).to eq(0)
     end
   end
 end
 
 describe "annual_med_exp" do
-  context "with $1000 starting annual medical expenses" do
+  context "with $1000 initial annual medical expenses" do
     before (:each) do
       @config_file = ConfigFile.new
       @config_file.set_config_override ({
         "starting_year" => 2020,
         "starting_month" => 1,
-        "med_exp_inflation" => 0,
+        "med_exp_inflation" => 0
       })
       @expenses = ExpenseCalc.new
-      allow(@expenses).to receive(:starting_annual_med_exp).and_return(1000)
+      allow(@expenses).to receive(:initial_annual_med_exp).and_return(1000)
     end
     it "returns $1000 after 1 year" do
       expect(@expenses.annual_med_exp(2020)).to eq(1000)
@@ -194,13 +228,40 @@ describe "gross_exp" do
   context "with $1000 in each of annual expenses, 
   annual medical expenses and large expenses" do
     before (:each) do
+      @config_file = ConfigFile.new
+        @config_file.set_config_override ({
+           "widowed" => {
+             "widowed_year" => 2025
+           }
+        })
       @expenses = ExpenseCalc.new
-      allow(@expenses).to receive(:annual_exp).and_return(1000)
-      allow(@expenses).to receive(:annual_med_exp).and_return(1000)
-      allow(@expenses).to receive(:large_exp).and_return(1000)
+        allow(@expenses).to receive(:annual_exp).and_return(1000)
+        allow(@expenses).to receive(:annual_med_exp).and_return(1000)
+        allow(@expenses).to receive(:large_exp).and_return(1000)
+        allow(@expenses).to receive(:widowed_expense_fract).and_return(0.5)
     end
-    it "returns $3000" do
+    it "returns $3000 for the first full year" do
       expect(@expenses.gross_exp(2020)).to eq(3000)
+    end
+    it "returns widowed expense of $2000" do
+      expect(@expenses.gross_exp(2025)).to eq(2000)
+    end
+  end
+end
+
+describe "claculate widowed expense fraction" do
+  context "with values for initial widowed and initial maried expense" do
+    before (:each) do
+      @expenses = ExpenseCalc.new
+      allow(@expenses).to receive(:initial_annual_exp)
+            .and_return(2800)
+      allow(@expenses).to receive(:initial_annual_med_exp)
+            .and_return(1200)
+      allow_any_instance_of(WidowedExpense)
+            .to receive(:initial_widowed_annual_exp).and_return(2000)
+    end
+    it "returns widowed expense fraction of 0.5" do
+      expect(@expenses.widowed_expense_fract).to eq(0.5)
     end
   end
 end
