@@ -3,7 +3,7 @@
 
 require_relative 'Config'
 
-class Fixnum
+class Integer
 
     def is_age
         config_file = ConfigFile.new
