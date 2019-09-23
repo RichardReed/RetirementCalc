@@ -11,10 +11,10 @@ require_relative 'ResultsToCommandLine'
 
 class MoneyRanOut
     def initialize
-        @config_hash = ConfigFile.new
+        ConfigFile.new.config
         @final_results = Results.new
         @write_results_to_command_line = ResultsToCommandLine.new
-        @current_year = @config_hash.config['starting_year']
+        @current_year = $CONFIG['starting_year']
         @ira_in = IRA.new
         @non_ira_in = NonIRA.new
     end

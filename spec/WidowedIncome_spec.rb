@@ -1,9 +1,9 @@
 require_relative 'spec_helper'
- 
-# Simplifying the widowed income by using the initial value 
-# of pension incomes to calculate the 
+
+# Simplifying the widowed income by using the initial value
+# of pension incomes to calculate the
 # widowed income fraction no matter what year they start in.
-# This fraction is then multiplied by the final married pension income to 
+# This fraction is then multiplied by the final married pension income to
 # obtain the final widowed income.
 
 # puts "config file is: #{@config_file.config}"
@@ -21,6 +21,7 @@ describe "calculate initial widowed pension income" do
           "starting_ge_pension" => 300
           }
         })
+      @config_file.config
       @widowed_income = WidowedIncome.new
     end
     it "returns widowed income of $1,700" do
@@ -41,6 +42,7 @@ describe "calculate initial married pension income" do
           "starting_ge_pension" => 400
           }
         })
+      @config_file.config
       @widowed_income = WidowedIncome.new
     end
     it "returns married income of $2,400" do

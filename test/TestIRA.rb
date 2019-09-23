@@ -6,9 +6,11 @@ require_relative '../lib/IRA'
 
 class TestIRAMethods < Test::Unit::TestCase
   def setup
+    @config_hash = ConfigFile.new
+    @config_hash.config
     @ira_in = IRA.new
   end
-	
+
   def test_ira_spend
     results = [
       [ -13275, 2014 ],
@@ -22,11 +24,11 @@ class TestIRAMethods < Test::Unit::TestCase
       [ -28355, 2038 ],
       [ -70079, 2046]
     ]
-    results.each do |expense, year| 
+    results.each do |expense, year|
       assert_equal(expense, @ira_in.ira_spend(year))
-    end				
+    end
   end
-  
+
   def test_ira_account
     results = [
       [ 592168, 2014 ],
@@ -40,8 +42,8 @@ class TestIRAMethods < Test::Unit::TestCase
       [ 367623, 2038 ],
       [ -71805, 2046 ]
     ]
-    results.each do |expense, year| 
+    results.each do |expense, year|
       assert_equal(expense, @ira_in.ira_account(year))
-    end				
+    end
   end
 end

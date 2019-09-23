@@ -3,15 +3,13 @@
 
 require_relative 'Config'
 
-class Fixnum
+class Integer
 
     def is_age
-        config_file = ConfigFile.new
-        self - config_file.config['birth_year']
+        self - $CONFIG['birth_year']
     end
 
     def is_year
-        config_file = ConfigFile.new
-        self + config_file.config['birth_year']
+        self + $CONFIG['birth_year']
     end
 end

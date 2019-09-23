@@ -13,6 +13,7 @@ describe "navy_ret_income" do
           "starting_navy_ret" => 1000
           }
         })
+      @config_file.config
       @income = IncomeCalc.new
     end
     it "returns $12,000 after 5 years with 0% raise" do
@@ -46,6 +47,7 @@ describe "ge_pension_income" do
           "starting_ge_pension" => 1000
           }
         })
+      @config_file.config
       @income = IncomeCalc.new
     end
     it "returns $12,000 after 5 years with 0% raise" do
@@ -79,6 +81,7 @@ describe "alc_pension_income" do
           "starting_alc_pension" => 1000
           }
         })
+      @config_file.config
       @income = IncomeCalc.new
     end
     it "returns $12,000 after 5 years with 0% raise" do
@@ -112,6 +115,7 @@ describe "ss_income" do
         "navy_and_ss_raise" => 0,
         "starting_ss" => 1000
         })
+      @config_file.config
       @income = IncomeCalc.new
     end
     it "returns $12,000 after 5 years with 0% raise" do
@@ -150,6 +154,7 @@ describe "ss_spouse_income" do
         "spouse_ss" => 1000,
         "spouse_new_ss" => 2000
         })
+      @config_file.config
       @income = IncomeCalc.new
     end
     it "returns $12,000/yr after 5 years with 0% raise" do
@@ -213,6 +218,7 @@ describe "lump_sum_income" do
           "widowed_year" => 2022
            }
         })
+      @config_file.config
       @income = IncomeCalc.new
     end
     it "while married, returns $1000 when final_year is 2020" do
@@ -244,9 +250,10 @@ describe "life_insurance_income" do
       @config_file.set_config_override ({
         "widowed" => {
           "life_insurance" => 1000,
-          "widowed_year" => 2020 
+          "widowed_year" => 2020
           }
         })
+      @config_file.config
       @income = IncomeCalc.new
     end
     it "returns $1000 when year is 2020" do
@@ -272,6 +279,7 @@ describe "total_pension_income" do
           "widowed_year" => 2005
           }
         })
+      @config_file.config
       @income = IncomeCalc.new
       allow(@income).to receive(:navy_ret_income).and_return(700)
       allow(@income).to receive(:ge_pension_income).and_return(1000)
@@ -286,7 +294,7 @@ describe "total_pension_income" do
       expect(@income.total_pension_income(2000)).to eq(5400)
     end
     it "returns $2700 for the last 6 months of the year" do
-      @config_file.config["starting_month"] = 7 
+      @config_file.config["starting_month"] = 7
       expect(@income.total_pension_income(2000)).to eq(2700)
     end
     it "returns $5400 for the 2nd year" do
@@ -299,7 +307,7 @@ describe "total_pension_income" do
     it "returns widowed income of $1725 when " +
        "starting in month 7 and starting_year = widowed-year" do
       @config_file.config["starting_year"] = 2005
-      @config_file.config["starting_month"] = 7 
+      @config_file.config["starting_month"] = 7
       expect(@income.total_pension_income(2005)).to eq(1725)
     end
   end

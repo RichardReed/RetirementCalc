@@ -5,7 +5,7 @@
 # Calculates the amount of debt by computing the total to be repaid and
 #   subtracting it from the initial non-IRA savings.
 # Interest for non-IRA savings is reduced 15% due to being taxed.
-# Total debt, including accumulated interest is subtracted 
+# Total debt, including accumulated interest is subtracted
 #   from the initial non-IRA savings amount.
 
 require_relative 'Config'
@@ -17,8 +17,7 @@ require_relative 'IncomeTax'
 class NonIRA
 
   def initialize
-    @config_hash = ConfigFile.new
-    @current_year = @config_hash.config['starting_year']
+    @current_year = $CONFIG['starting_year']
     @income_in = IncomeCalc.new
     @expenses_in = ExpenseCalc.new
     @income_tax_in = IncomeTax.new
@@ -44,9 +43,9 @@ class NonIRA
   def non_ira_account(final_year)
     this_year = @current_year
     non_ira_account_value = initial_non_ira_account_value
-    ira_to_non_ira_xfer = @config_hash.config['ira_to_non_ira_xfer']
-    interest = @config_hash.config['savings_interest_rate'] *
-      (1.0 - @config_hash.config['pretax_interest_rate_reduction']) / 100.0
+    ira_to_non_ira_xfer = $CONFIG['ira_to_non_ira_xfer']
+    interest = $CONFIG['savings_interest_rate'] *
+      (1.0 - $CONFIG['pretax_interest_rate_reduction']) / 100.0
 
     this_year.upto(final_year) do |year|
       if year.is_age < 60
@@ -64,16 +63,16 @@ class NonIRA
  private
 
   def initial_non_ira_account_value
-    starting_non_ira = @config_hash.config['starting_non_ira']
-    starting_non_ira_disc = @config_hash.config['starting_savings_discount']
+    starting_non_ira = $CONFIG['starting_non_ira']
+    starting_non_ira_disc = $CONFIG['starting_savings_discount']
 
     return (starting_non_ira * starting_non_ira_disc / 100) - starting_debt
   end
 
-  def starting_debt 
-    debt_amount = @config_hash.config['debt_amount']
-    debt_interest = @config_hash.config['debt_interest']
-    debt_years = @config_hash.config['debt_years']
+  def starting_debt
+    debt_amount = $CONFIG['debt_amount']
+    debt_interest = $CONFIG['debt_interest']
+    debt_years = $CONFIG['debt_years']
 
     return debt_amount * (1 + (debt_years * debt_interest / 200.0))
   end

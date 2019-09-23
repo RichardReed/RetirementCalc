@@ -6,6 +6,7 @@ describe "ira_spend" do
       before (:each) do
         config_file = ConfigFile.new
         config_file.set_config_override ({ "birth_year" => 1960 })
+        config_file.config
         @ira = IRA.new
         allow_any_instance_of(IncomeCalc).to receive(:gross_income).
                  and_return(1000)
@@ -23,6 +24,7 @@ describe "ira_spend" do
       it "returns $0" do
         config_file = ConfigFile.new
         config_file.set_config_override ({ "birth_year" => 1960 })
+        config_file.config
         @ira = IRA.new
         allow_any_instance_of(IncomeCalc).to receive(:gross_income).
                  and_return(2000)
@@ -35,19 +37,20 @@ describe "ira_spend" do
 end
 describe "ira_account" do
   describe "calculates the IRA account value in the final year. "+
-            "(does not allow transfer of money from IRA savings "+ 
-            "if age is less than 60)"  do 
+            "(does not allow transfer of money from IRA savings "+
+            "if age is less than 60)"  do
     context "with initial age 60 and IRA value of $1000" do
       before (:each) do
         @config_file = ConfigFile.new
         @config_file.set_config_override ({
           "starting_year" => 2020,
-          "birth_year" => 1960, 
+          "birth_year" => 1960,
           "starting_ira" => 1000,
           "starting_savings_discount" => 100,
           "ira_to_non_ira_xfer" => 0,
-          "savings_interest_rate" => 0 
+          "savings_interest_rate" => 0
           })
+        @config_file.config
         @ira = IRA.new
         allow(@ira).to receive(:ira_spend).and_return(0)
       end
@@ -87,12 +90,13 @@ describe "ira_account" do
         @config_file = ConfigFile.new
         @config_file.set_config_override ({
           "starting_year" => 2020,
-          "birth_year" => 1970, 
+          "birth_year" => 1970,
           "starting_ira" => 1000,
           "starting_savings_discount" => 100,
           "ira_to_non_ira_xfer" => 0,
-          "savings_interest_rate" => 0 
+          "savings_interest_rate" => 0
           })
+        @config_file.config
         @ira = IRA.new
         allow(@ira).to receive(:ira_spend).and_return(0)
       end

@@ -10,9 +10,10 @@ describe "income_tax (this_year)" do
           "bottom_bracket_min" => 10000,
           "middle_bracket_min" => 20000,
           "upper_bracket_min" => 30000,
-          "middle_bracket_base_tax" => 2000, 
-          "upper_bracket_base_tax" => 5000, 
+          "middle_bracket_base_tax" => 2000,
+          "upper_bracket_base_tax" => 5000,
           })
+        @config_file.config
         @taxes = IncomeTax.new
         allow(@taxes).to receive(:income).and_return(1)
       end
@@ -61,9 +62,10 @@ describe "taxable_income (this_year)" do
       @config_file = ConfigFile.new
       @config_file.set_config_override ({
         "starting_year" => 2010,
-        "birth_year" => 1960, 
+        "birth_year" => 1960,
         "ira_to_non_ira_xfer" => 10000,
         })
+      @config_file.config
       @taxes = IncomeTax.new
       allow_any_instance_of(IncomeCalc).to receive_messages(
                 :life_insurance_income => 20000, :gross_income => 50000)
@@ -93,8 +95,9 @@ describe "income_tax (this year)" do
         @config_file = ConfigFile.new
         @config_file.set_config_override ({
           "starting_year" => 2010,
-          "birth_year" => 1960, 
+          "birth_year" => 1960,
           })
+        @config_file.config
         allow_any_instance_of(IRA).to receive(:ira_spend).
                  and_return(1)
         @tax = IncomeTax.new
@@ -103,7 +106,7 @@ describe "income_tax (this year)" do
       it "returns an error since spending is positive" do
         allow_any_instance_of(IRA).to receive(:ira_spend).
                  and_return(0)
-        expect(@tax.income_tax(2020)).to raise_error 
+        expect(@tax.income_tax(2020)).to raise_error
    #              ("Error: IRA is 1. It should not be positive")
       end
     end

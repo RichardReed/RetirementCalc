@@ -10,8 +10,7 @@ require_relative 'Expense'
 class IRA
 
   def initialize
-    @config_hash = ConfigFile.new
-    @current_year = @config_hash.config['starting_year']
+    @current_year = $CONFIG['starting_year']
     @income_in = IncomeCalc.new
     @expenses_in = ExpenseCalc.new
   end
@@ -26,10 +25,10 @@ class IRA
 
   def ira_account(final_year)
     this_year = @current_year
-    starting_ira_value = @config_hash.config['starting_ira']
-    starting_ira_disc = @config_hash.config['starting_savings_discount']
-    ira_to_non_ira_xfer = @config_hash.config['ira_to_non_ira_xfer']
-    interest = @config_hash.config['savings_interest_rate'] / 100.0
+    starting_ira_value = $CONFIG['starting_ira']
+    starting_ira_disc = $CONFIG['starting_savings_discount']
+    ira_to_non_ira_xfer = $CONFIG['ira_to_non_ira_xfer']
+    interest = $CONFIG['savings_interest_rate'] / 100.0
 
     ira_account_value = starting_ira_value * starting_ira_disc / 100
 
@@ -39,7 +38,7 @@ class IRA
                             (1 + interest)).round
       else
         ira_account_value = ((ira_account_value + ira_spend(year) -
-                            ira_to_non_ira_xfer) * (1 + interest)).round
+                         ira_to_non_ira_xfer) * (1 + interest)).round
       end
     end  # do
     return ira_account_value

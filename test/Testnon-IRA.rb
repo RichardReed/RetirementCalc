@@ -6,6 +6,8 @@ require_relative '../lib/non-IRA'
 
 class TestNonIRAMethods < Test::Unit::TestCase
   def setup
+    @config_hash = ConfigFile.new
+    @config_hash.config
     @non_ira_in = NonIRA.new
     @results_file = YAML::load(File.open("results.yml"))
   end
@@ -22,7 +24,7 @@ class TestNonIRAMethods < Test::Unit::TestCase
       [ -14714, 2038 ],
       [ -28271, 2046 ]
 	]
-    results.each do |expense, year| 
+    results.each do |expense, year|
       assert_equal(expense, @non_ira_in.sav_spend(year))
     end
   end

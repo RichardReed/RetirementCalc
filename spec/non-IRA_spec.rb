@@ -6,6 +6,7 @@ describe "save_spend (this year)" do
       before (:each) do
         config_file = ConfigFile.new
         config_file.set_config_override ({ "birth_year" => 1960 })
+        config_file.config
         @non_ira = NonIRA.new
         allow_any_instance_of(IncomeCalc).to receive(:gross_income).
                  and_return(2000)
@@ -37,11 +38,12 @@ describe "non-ira_account" do
         @config_file = ConfigFile.new
         @config_file.set_config_override ({
           "starting_year" => 2010,
-          "birth_year" => 1960, 
+          "birth_year" => 1960,
           "ira_to_non_ira_xfer" => 0,
-          "savings_interest_rate" => 0, 
+          "savings_interest_rate" => 0,
           "pretax_interest_rate_reduction" => 0.0
           })
+        @config_file.config
         @non_ira = NonIRA.new
         allow(@non_ira).to receive(:initial_non_ira_account_value).
              and_return(1000)
@@ -69,11 +71,12 @@ describe "non-ira_account" do
         @config_file = ConfigFile.new
         @config_file.set_config_override ({
           "starting_year" => 2021,
-          "birth_year" => 1960, 
+          "birth_year" => 1960,
           "ira_to_non_ira_xfer" => 0,
-          "savings_interest_rate" => 0, 
+          "savings_interest_rate" => 0,
           "pretax_interest_rate_reduction" => 0.0
           })
+        @config_file.config
         @non_ira = NonIRA.new
         allow(@non_ira).to receive(:initial_non_ira_account_value).
              and_return(1000)
@@ -100,12 +103,13 @@ describe "non-ira_account" do
         @config_file = ConfigFile.new
         @config_file.set_config_override ({
           "starting_year" => 2016,
-          "birth_year" => 1960, 
+          "birth_year" => 1960,
           "ira_to_non_ira_xfer" => 0,
-          "savings_interest_rate" => 0, 
+          "savings_interest_rate" => 0,
           "ira_to_non_ira_xfer" => 100,
           "pretax_interest_rate_reduction" => 0.0
           })
+        @config_file.config
         @non_ira = NonIRA.new
         allow(@non_ira).to receive(:initial_non_ira_account_value).
              and_return(1000)
@@ -128,8 +132,9 @@ describe "initial_non-ira_account_value" do
           "starting_savings_discount" => 100,
           "debt_amount" => 0,
           "debt_interest" => 0,
-          "debt_years" => 0 
+          "debt_years" => 0
           })
+        @config_file.config
         @non_ira = NonIRA.new
       end
       it "returns $1000 with $0 debt and 100% not discounted" do

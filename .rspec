@@ -1,2 +1,4 @@
---default-path rspec/
+--default-path spec/
+--require spec_helper
 --pattern *_spec.rb
+--color

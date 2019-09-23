@@ -1,10 +1,12 @@
 require 'test/unit'
 require_relative '../lib/AgeYear'
+require_relative '../lib/Config'
 
 class TestAgeYear < Test::Unit::TestCase
 
   def setup
     @config_hash = ConfigFile.new
+    @config_hash.config
   end
 
   def test_is_age

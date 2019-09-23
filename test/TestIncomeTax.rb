@@ -5,9 +5,11 @@ require_relative '../lib/IncomeTax'
 
 class TestIncomeTaxMethods < Test::Unit::TestCase
   def setup
+    @config_hash = ConfigFile.new
+    @config_hash.config
     @income_tax_in = IncomeTax.new
   end
-	
+
   def test_income_tax
     results = [
       [ 4211, 2014 ],    # 15% tax bracket
@@ -22,8 +24,8 @@ class TestIncomeTaxMethods < Test::Unit::TestCase
       [ 11138, 2035 ],   # 25% tax bracket
       [ 28271, 2046 ]    # 25% tax bracket
     ]
-    results.each do |expense, year| 
+    results.each do |expense, year|
       assert_equal(expense, @income_tax_in.income_tax(year))
-    end		
+    end
   end
 end

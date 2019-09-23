@@ -1,10 +1,10 @@
 require_relative 'spec_helper'
 require_relative '../lib/WidowedExpense'
- 
-# Simplifying the widowed expenses by using the initial value 
-# of all expenses (including Medical and annual expenses) to calculate the 
+
+# Simplifying the widowed expenses by using the initial value
+# of all expenses (including Medical and annual expenses) to calculate the
 # widowed expense fraction no matter what year they start in.
-# This fraction is then multiplied by the final married expense to 
+# This fraction is then multiplied by the final married expense to
 # obtain the final widowed expense.
 
 #puts "config file is: #{@config_file.config}"
@@ -35,6 +35,7 @@ describe "calculate initial annual widowed expenses" do
           "country_place_dues" => 300,
           }
         })
+      @config_file.config
       @widowed_expense = WidowedExpense.new
     end
     it "returns monthly widowed of $4,680" do

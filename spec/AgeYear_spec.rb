@@ -7,6 +7,7 @@ module AgeYear
         before (:each) do
           config_file = ConfigFile.new
           config_file.set_config_override ({ "birth_year" => 1960 })
+          config_file.config
         end
         it "returns age 5 in 1965" do
           expect(1965.is_age).to eq(5)
@@ -19,6 +20,7 @@ module AgeYear
         before (:each) do
           config_file = ConfigFile.new
           config_file.set_config_override ({ "birth_year" => 2010 })
+          config_file.config
         end
         it "returns age 8 in 2018" do
           expect(2018.is_age).to eq(8)
@@ -35,6 +37,7 @@ module AgeYear
         before (:each) do
           config_file = ConfigFile.new
           config_file.set_config_override ({ "birth_year" => 1960 })
+          config_file.config
         end
         it "returns 1970 for age 10" do
           expect(10.is_year).to eq(1970)
@@ -47,6 +50,7 @@ module AgeYear
          before (:each) do
            config_file = ConfigFile.new
            config_file.set_config_override ({ "birth_year" => 1999 })
+           config_file.config
          end
          it "returns 1999 for age 0" do
            expect(0.is_year).to eq(1999)

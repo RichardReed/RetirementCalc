@@ -8,11 +8,13 @@ require_relative '../lib/Config'
 class TestRetirementFundProgramAge < Test::Unit::TestCase
 
   def setup
+    @config_hash = ConfigFile.new
+    @config_hash.config
     @final_results = Results.new
     @final_results.results_for(90)
     @finalyr = YAML::load(File.open("results.yml"))
   end
-	
+
   def test_retirement_fund_program_age
     assert_equal(2044, @finalyr[:year])
     assert_equal(90, @finalyr[:age])
