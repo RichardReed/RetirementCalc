@@ -104,7 +104,6 @@ describe "non-ira_account" do
         @config_file.set_config_override ({
           "starting_year" => 2016,
           "birth_year" => 1960,
-          "ira_to_non_ira_xfer" => 0,
           "savings_interest_rate" => 0,
           "ira_to_non_ira_xfer" => 100,
           "pretax_interest_rate_reduction" => 0.0
